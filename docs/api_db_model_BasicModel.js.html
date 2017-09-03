@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>api/db/model/BasicModel.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="BasicDAO.html">BasicDAO</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#addAndWhere">addAndWhere</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#addWhere">addWhere</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#create">create</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#createQuery">createQuery</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#getAll">getAll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#getByCriteria">getByCriteria</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#getByField">getByField</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#getById">getById</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#remove">remove</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#returnResult">returnResult</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="BasicModel.html">BasicModel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicModel.html#.initJsonSchema">initJsonSchema</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicModel.html#$beforeInsert">$beforeInsert</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicModel.html#$beforeUpdate">$beforeUpdate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicModel.html#makeQuery">makeQuery</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="CRUDEndpoint.html">CRUDEndpoint</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#getRouter">getRouter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initAdditionalEndpoints">initAdditionalEndpoints</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initCreateEndpoint">initCreateEndpoint</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initDeleteEndpoint">initDeleteEndpoint</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initEndpoints">initEndpoints</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initGetAllEndpoint">initGetAllEndpoint</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initGetByIdEndpoint">initGetByIdEndpoint</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initUpdateEndpoint">initUpdateEndpoint</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="EndpointRouter.html">EndpointRouter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="EndpointRouter.html#getRouter">getRouter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="EndpointRouter.html#initAdditionalEndpoints">initAdditionalEndpoints</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="EndpointRouter.html#initEndpoints">initEndpoints</a></span></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Errors.html">Errors</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~AbstractClassConstructor">AbstractClassConstructor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~CreateEntityFailed">CreateEntityFailed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~CustomError">CustomError</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~GetAllFailed">GetAllFailed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~GetByCriteriaFailed">GetByCriteriaFailed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~GetByFieldFailed">GetByFieldFailed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~GetByIdFailed">GetByIdFailed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~InvalidArguments">InvalidArguments</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~RemoveEntityFailed">RemoveEntityFailed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~UpdateEntityFailed">UpdateEntityFailed</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">api/db/model/BasicModel.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const {Model} = require('objection');
+const objection = require('objection');
+
+/**
+ * BasicModel implementation with default properties and transactional query creator
+ * @abstract
+ */
+class BasicModel extends Model {
+
+    /**
+     * Default properties getter
+     * @type {Object}
+     * @property {null | DateTime} createdAt Date-time of object creation
+     * @property {null | DateTime} updatedAt Date-time of object last update
+     * @property {null | number} createdBy user ID (creator)
+     * @property {null | number} updatedBy user ID (updater)
+     */
+    static get defaultProperties() {
+        return {
+            createdAt: {anyOf: [{type: 'null'}, {type: 'string', format: 'date-time'}]},
+            updatedAt: {anyOf: [{type: 'null'}, {type: 'string', format: 'date-time'}]},
+            createdBy: {anyOf: [{type: 'null'}, {type: 'integer'}]},
+            updatedBy: {anyOf: [{type: 'null'}, {type: 'integer'}]}
+        };
+    }
+
+    /**
+     * Json Schema initializer
+     * @param schema {Object} schema object
+     * @param {object} schema.properties schema properties (see defaultProperties)
+     * @return {Object} Model schema
+     */
+    static initJsonSchema(schema) {
+        schema.properties = Object.assign(schema.properties, this.defaultProperties);
+        return schema;
+    }
+
+    /**
+     * Method called before entity is inserted (sets: createdAt, updatedAt, createdBy, updatedBy)
+     * @param context {ReqContext} request context
+     */
+    $beforeInsert(context) {
+        this.createdAt = new Date().toISOString();
+        this.updatedAt = new Date().toISOString();
+        this.createdBy = context.user.id;
+        this.updatedBy = context.user.id;
+    }
+
+    /**
+     * Method called before entity is updated (sets: updatedAt, updatedBy)
+     * @param options
+     * @param context {ReqContext} request context
+     */
+    $beforeUpdate(options, context) {
+        this.updatedAt = new Date().toISOString();
+        this.updatedBy = context.user.id;
+    }
+
+    /**
+     * Executes query
+     * @param callback
+     * @return {Promise&lt;BasicModel | BasicModel[]>}
+     */
+    makeQuery(callback) {
+        return objection.transaction(this.knex(), transaction => callback(transaction));
+    }
+}
+
+module.exports = BasicModel;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a> on Sun Sep 03 2017 21:35:17 GMT+0200 (Střední Evropa (letní čas)) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

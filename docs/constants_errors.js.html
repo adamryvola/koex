@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>constants/errors.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="BasicDAO.html">BasicDAO</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#addAndWhere">addAndWhere</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#addWhere">addWhere</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#create">create</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#createQuery">createQuery</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#getAll">getAll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#getByCriteria">getByCriteria</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#getByField">getByField</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#getById">getById</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#remove">remove</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#returnResult">returnResult</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicDAO.html#update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="BasicModel.html">BasicModel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicModel.html#.initJsonSchema">initJsonSchema</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicModel.html#$beforeInsert">$beforeInsert</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicModel.html#$beforeUpdate">$beforeUpdate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicModel.html#makeQuery">makeQuery</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="CRUDEndpoint.html">CRUDEndpoint</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#getRouter">getRouter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initAdditionalEndpoints">initAdditionalEndpoints</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initCreateEndpoint">initCreateEndpoint</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initDeleteEndpoint">initDeleteEndpoint</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initEndpoints">initEndpoints</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initGetAllEndpoint">initGetAllEndpoint</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initGetByIdEndpoint">initGetByIdEndpoint</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="CRUDEndpoint.html#initUpdateEndpoint">initUpdateEndpoint</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="EndpointRouter.html">EndpointRouter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="EndpointRouter.html#getRouter">getRouter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="EndpointRouter.html#initAdditionalEndpoints">initAdditionalEndpoints</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="EndpointRouter.html#initEndpoints">initEndpoints</a></span></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Errors.html">Errors</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~AbstractClassConstructor">AbstractClassConstructor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~CreateEntityFailed">CreateEntityFailed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~CustomError">CustomError</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~GetAllFailed">GetAllFailed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~GetByCriteriaFailed">GetByCriteriaFailed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~GetByFieldFailed">GetByFieldFailed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~GetByIdFailed">GetByIdFailed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~InvalidArguments">InvalidArguments</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~RemoveEntityFailed">RemoveEntityFailed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Errors.html#~UpdateEntityFailed">UpdateEntityFailed</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">constants/errors.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module Errors */
+
+const INVALID_ARGUMENTS = 'INVALID_ARGUMENTS';
+const CREATE_ENTITY_FAILED = 'CREATE_ENTITY_FAILED';
+const UPDATE_ENTITY_FAILED = 'UPDATE_ENTITY_FAILED';
+const ABSTRACT_CLASS_CONSTRUCTOR = 'ABSTRACT_CLASS_CONSTRUCTOR';
+const GET_BY_ID_FAILED = 'GET_BY_ID_FAILED';
+const GET_BY_FIELD_FAILED ='GET_BY_FIELD_FAILED';
+const GET_ALL_FAILED = 'GET_ALL_FAILED';
+const GET_BY_CRITERIA__FAILED = 'GET_BY_CRITERIA__FAILED';
+const REMOVE_ENTITY_FAILED = 'REMOVE_ENTITY_FAILED';
+
+/**
+ * Custom error creator
+ * @param message {string} Error message
+ * @param error {error|string} error additional info
+ * @param code {string} custom error code
+ */
+const CustomError = (message, error, code) => ({message, error, code});
+
+/**
+ * Invalid arguments error object
+ * @param error {error|string} error additional info
+ */
+const InvalidArguments = error => ({
+    message: INVALID_ARGUMENTS,
+    error,
+    code: '001'
+});
+
+/**
+ * Create entity error object
+ * @param error {error|string} error additional info
+ */
+const CreateEntityFailed = error=> ({
+    message: CREATE_ENTITY_FAILED,
+    error,
+    code: '002'
+});
+
+/**
+ * Update entity error object
+ * @param error {error|string} error additional info
+ */
+const UpdateEntityFailed = error => ({
+    message: UPDATE_ENTITY_FAILED,
+    error,
+    code: '003'
+});
+
+/**
+ * Abstract class constructor error object
+ * @param error {error|string} error additional info
+ */
+const AbstractClassConstructor = error => ({
+    message: ABSTRACT_CLASS_CONSTRUCTOR,
+    error,
+    code: '004'
+});
+
+/**
+ * Get by ID error object
+ * @param error {error|string} error additional info
+ */
+const GetByIdFailed = error => ({
+    message: GET_BY_ID_FAILED,
+    error,
+    code: '005'
+});
+
+/**
+ * Get by field error object
+ * @param error {error|string} error additional info
+ */
+const GetByFieldFailed = error => ({
+    message: GET_BY_FIELD_FAILED,
+    error,
+    code: '006'
+});
+
+/**
+ * Get all error object
+ * @param error {error|string} error additional info
+ */
+const GetAllFailed = error => ({
+    message: GET_ALL_FAILED,
+    error,
+    code: '007'
+});
+
+/**
+ * Get by criteria error object
+ * @param error {error|string} error additional info
+ */
+const GetByCriteriaFailed = error => ({
+    message: GET_BY_CRITERIA__FAILED,
+    error,
+    code: '008'
+});
+
+/**
+ * Remove entity error object
+ * @param error {error|string} error additional info
+ */
+const RemoveEntityFailed = error => ({
+    message: REMOVE_ENTITY_FAILED,
+    error,
+    code: '009'
+});
+
+modules.exports.CustomError = CustomError;
+modules.exports.InvalidArguments = InvalidArguments;
+modules.exports.CreateEntityFailed = CreateEntityFailed;
+modules.exports.UpdateEntityFailed = UpdateEntityFailed;
+modules.exports.AbstractClassConstructor = AbstractClassConstructor;
+modules.exports.GetByIdFailed = GetByIdFailed;
+modules.exports.GetByFieldFailed = GetByFieldFailed;
+modules.exports.GetAllFailed = GetAllFailed;
+modules.exports.GetByCriteriaFailed = GetByCriteriaFailed;
+modules.exports.RemoveEntityFailed = RemoveEntityFailed;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a> on Sun Sep 03 2017 21:35:17 GMT+0200 (Střední Evropa (letní čas)) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

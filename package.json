@@ -4,6 +4,7 @@
   "description": "Base entity management framework.",
   "main": "index.js",
   "scripts": {
+    "docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "test": "test"
   },
   "keywords": [
@@ -13,5 +14,14 @@
     "routing"
   ],
   "author": "Adam Ryvola <ryvolaadam@gmail.com> (http://www.adane.cz)",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "lodash": "^4.17.4",
+    "objection": "^0.8.8"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.5.4",
+    "minami": "^1.2.3"
+  }
 }
