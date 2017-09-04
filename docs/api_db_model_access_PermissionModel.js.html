@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>api/router/EndpointRouter.js - Documentation</title>
+    <title>api/db/model/access/PermissionModel.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">api/router/EndpointRouter.js</h1>
+    <h1 class="page-title">api/db/model/access/PermissionModel.js</h1>
     
 
     
@@ -39,51 +39,43 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const {Errors} = require('../../constants');
-const Router = require('express').Router;
+            <pre class="prettyprint source linenums"><code>const BasicModel = require('../BasicModel');
+const TABLES = require('../../../../constants/tables');
+const _ = require('lodash');
 
 /**
- * Endpoint handler - basic router
+ * PermissionModel implementation of default permission database entity
+ * @augments BasicModel
  */
-class EndpointRouter {
+class PermissionModel extends BasicModel {
 
-    /**
-     * Endpoint handler constructor
-     */
-    constructor() {
-        if (new.target === EndpointRouter) {
-            throw new Error(Errors.AbstractClassConstructor('[EndpointRouter] - Don\'t create EndpointRouter directly'));
-        }
-        this.router = new Router();
-        this.initEndpoints();
-        this.initAdditionalEndpoints();
+    static get tableName() {
+        return TABLES.PERMISSION_TABLE_NAME;
     }
 
     /**
-     * Initialize CRUD endpoints
+     * JsonSchema getter merge role schema with super class schema
+     * @type {Object}
+     * @property {string} name permission name
+     * @property {string} type permission type (allow, deny)
+     * @property {string} activity subject's activity
+     * @property {string} subject subject of permission (entity, view, ..)
      */
-    initEndpoints() {
-        this.router.use('/ping', (req, res) => {
-            return res.status(200).send('Pong');
-        })
-    }
-
-    /**
-     * Initialize additional endpoints
-     * @abstract
-     */
-    initAdditionalEndpoints() {}
-
-    /**
-     * Returns Router
-     * @return {Express.Router}
-     */
-    getRouter() {
-        return this.router;
+    static get jsonSchema() {
+        return _.merge(super.jsonSchema, {
+            properties: {
+                name: {type: 'string'},
+                type: {type: 'string'},
+                activity: {type: 'string'},
+                subject: {type: 'string'}
+            }});
     }
 }
 
-module.exports = EndpointRouter;
+module.exports = PermissionModel;
+
+
+
 </code></pre>
         </article>
     </section>

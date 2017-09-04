@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>api/router/EndpointRouter.js - Documentation</title>
+    <title>api/db/model/PublicModel.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">api/router/EndpointRouter.js</h1>
+    <h1 class="page-title">api/db/model/PublicModel.js</h1>
     
 
     
@@ -39,51 +39,44 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const {Errors} = require('../../constants');
-const Router = require('express').Router;
+            <pre class="prettyprint source linenums"><code>const BasicModel = require('../BasicModel');
+const _ = require('lodash');
+const crypto = require("crypto");
 
 /**
- * Endpoint handler - basic router
+ * PublicModel implementation. It generates random hash identifier on insert as 'uuid' attribute
+ * @abstract
+ * @augments BasicModel
  */
-class EndpointRouter {
+class PublicModel extends BasicModel {
 
     /**
-     * Endpoint handler constructor
+     * JsonSchema getter merge PublicModel schema with super class schema
+     * @type {PublicModelSchema}
+     * @property {string} uuid unique public identifier
+     * @returns PublicModelSchema
      */
-    constructor() {
-        if (new.target === EndpointRouter) {
-            throw new Error(Errors.AbstractClassConstructor('[EndpointRouter] - Don\'t create EndpointRouter directly'));
-        }
-        this.router = new Router();
-        this.initEndpoints();
-        this.initAdditionalEndpoints();
+    static get jsonSchema() {
+        return _.merge(super.jsonSchema, {
+            properties: {
+                uuid: {type: 'string'}
+            }
+        });
     }
 
     /**
-     * Initialize CRUD endpoints
+     * Method called before entity is inserted (sets: uuid) (super class method called too - look at BasicModel)
+     * @param context {ReqContext} request context
      */
-    initEndpoints() {
-        this.router.use('/ping', (req, res) => {
-            return res.status(200).send('Pong');
-        })
+    $beforeInsert(context) {
+        super.$beforeInsert(context);
+        this.uuid = crypto.randomBytes(12).toString("base64");
     }
 
-    /**
-     * Initialize additional endpoints
-     * @abstract
-     */
-    initAdditionalEndpoints() {}
-
-    /**
-     * Returns Router
-     * @return {Express.Router}
-     */
-    getRouter() {
-        return this.router;
-    }
 }
 
-module.exports = EndpointRouter;
+module.exports = PublicModel;
+
 </code></pre>
         </article>
     </section>

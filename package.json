@@ -2,7 +2,7 @@
   "name": "adane-fw",
   "version": "0.0.1",
   "description": "Base entity management framework.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "test": "test"
@@ -17,8 +17,10 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.4",
+    "knex": "^0.13.0",
     "lodash": "^4.17.4",
-    "objection": "^0.8.8"
+    "objection": "^0.8.8",
+    "pg": "^7.3.0"
   },
   "devDependencies": {
     "jsdoc": "^3.5.4",

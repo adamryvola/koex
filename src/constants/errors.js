@@ -1,4 +1,6 @@
-/** @module Errors */
+/**
+ * @module Errors
+ */
 
 const INVALID_ARGUMENTS = 'INVALID_ARGUMENTS';
 const CREATE_ENTITY_FAILED = 'CREATE_ENTITY_FAILED';
@@ -108,13 +110,13 @@ const RemoveEntityFailed = error => ({
     code: '009'
 });
 
-modules.exports.CustomError = CustomError;
-modules.exports.InvalidArguments = InvalidArguments;
-modules.exports.CreateEntityFailed = CreateEntityFailed;
-modules.exports.UpdateEntityFailed = UpdateEntityFailed;
-modules.exports.AbstractClassConstructor = AbstractClassConstructor;
-modules.exports.GetByIdFailed = GetByIdFailed;
-modules.exports.GetByFieldFailed = GetByFieldFailed;
-modules.exports.GetAllFailed = GetAllFailed;
-modules.exports.GetByCriteriaFailed = GetByCriteriaFailed;
-modules.exports.RemoveEntityFailed = RemoveEntityFailed;
+module.exports.CustomError = CustomError;
+module.exports.InvalidArguments = InvalidArguments;
+module.exports.CreateEntityFailed = CreateEntityFailed;
+module.exports.UpdateEntityFailed = UpdateEntityFailed;
+module.exports.AbstractClassConstructor = AbstractClassConstructor;
+module.exports.GetByIdFailed = GetByIdFailed;
+module.exports.GetByFieldFailed = GetByFieldFailed;
+module.exports.GetAllFailed = GetAllFailed;
+module.exports.GetByCriteriaFailed = GetByCriteriaFailed;
+module.exports.RemoveEntityFailed = RemoveEntityFailed;

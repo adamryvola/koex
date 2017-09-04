@@ -1,5 +1,6 @@
 const {Model} = require('objection');
 const objection = require('objection');
+const {Errors} = require('../../constants');
 
 /**
  * BasicModel implementation with default properties and transactional query creator
@@ -7,32 +8,44 @@ const objection = require('objection');
  */
 class BasicModel extends Model {
 
+    constructor() {
+        if (new.target === BasicModel) {
+            throw new Error(Errors.AbstractClassConstructor('[BasicModel] - Don\'t create BasicModel directly'));
+        }
+        super();
+    }
+
     /**
-     * Default properties getter
-     * @type {Object}
-     * @property {null | DateTime} createdAt Date-time of object creation
-     * @property {null | DateTime} updatedAt Date-time of object last update
-     * @property {null | number} createdBy user ID (creator)
-     * @property {null | number} updatedBy user ID (updater)
+     * Table name getter
+     * @abstract
+     * @throws {AbstractClassConstructor}
+     * @return {String} table name
      */
-    static get defaultProperties() {
-        return {
-            createdAt: {anyOf: [{type: 'null'}, {type: 'string', format: 'date-time'}]},
-            updatedAt: {anyOf: [{type: 'null'}, {type: 'string', format: 'date-time'}]},
-            createdBy: {anyOf: [{type: 'null'}, {type: 'integer'}]},
-            updatedBy: {anyOf: [{type: 'null'}, {type: 'integer'}]}
-        };
+    static get tableName() {
+        throw new Error(Errors.AbstractClassConstructor('[BasicModel - tableName getter] - Don\'t create BasicModel directly'))
     }
 
     /**
      * Json Schema initializer
-     * @param schema {Object} schema object
-     * @param {object} schema.properties schema properties (see defaultProperties)
-     * @return {Object} Model schema
+     * @type {BasicSchema}
+     * @property {null | number} id unique database identifier (primary key)
+     * @property {null | Date} createdAt Date-time of object creation
+     * @property {null | Date} updatedAt Date-time of object last update
+     * @property {null | number} createdBy user ID (creator)
+     * @property {null | number} updatedBy user ID (updater)
+     * @return {BasicSchema} BasicModel schema
      */
-    static initJsonSchema(schema) {
-        schema.properties = Object.assign(schema.properties, this.defaultProperties);
-        return schema;
+    static get jsonSchema() {
+        return {
+            type: 'object',
+            properties: {
+                id: {type: 'integer'},
+                createdAt: {anyOf: [{type: 'null'}, {type: 'string', format: 'date-time'}]},
+                updatedAt: {anyOf: [{type: 'null'}, {type: 'string', format: 'date-time'}]},
+                createdBy: {anyOf: [{type: 'null'}, {type: 'integer'}]},
+                updatedBy: {anyOf: [{type: 'null'}, {type: 'integer'}]}
+            }
+        };
     }
 
     /**

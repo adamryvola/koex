@@ -1,4 +1,5 @@
 const EndpointRouter = require('./EndpointRouter');
+const {Errors} = require('../../constants');
 
 /**
  * CRUD Endpoint
@@ -9,7 +10,7 @@ class CRUDEndpoint extends EndpointRouter{
     constructor(dao) {
         super();
         if (new.target === CRUDEndpoint) {
-            throw new Error(Error.AbstractClassConstructor('[CRUDEndpoint] - Don\'t create CRUDEndpoint directly'));
+            throw new Error(Errors.AbstractClassConstructor('[CRUDEndpoint] - Don\'t create CRUDEndpoint directly'));
         }
         this.setDAO(dao);
     }
@@ -75,5 +76,6 @@ class CRUDEndpoint extends EndpointRouter{
     getDAO() {
         return this.DAO;
     }
-
 }
+
+module.exports.CRUDEndpoint = CRUDEndpoint;

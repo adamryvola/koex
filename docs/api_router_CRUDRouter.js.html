@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>api/router/EndpointRouter.js - Documentation</title>
+    <title>api/router/CRUDRouter.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">api/router/EndpointRouter.js</h1>
+    <h1 class="page-title">api/router/CRUDRouter.js</h1>
     
 
     
@@ -39,51 +39,87 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const {Errors} = require('../../constants');
-const Router = require('express').Router;
+            <pre class="prettyprint source linenums"><code>const EndpointRouter = require('./EndpointRouter');
+const {Errors} = require('../../constants');
 
 /**
- * Endpoint handler - basic router
+ * CRUD Endpoint
+ * @extends EndpointRouter
  */
-class EndpointRouter {
+class CRUDEndpoint extends EndpointRouter{
 
-    /**
-     * Endpoint handler constructor
-     */
-    constructor() {
-        if (new.target === EndpointRouter) {
-            throw new Error(Errors.AbstractClassConstructor('[EndpointRouter] - Don\'t create EndpointRouter directly'));
+    constructor(dao) {
+        super();
+        if (new.target === CRUDEndpoint) {
+            throw new Error(Errors.AbstractClassConstructor('[CRUDEndpoint] - Don\'t create CRUDEndpoint directly'));
         }
-        this.router = new Router();
-        this.initEndpoints();
-        this.initAdditionalEndpoints();
+        this.setDAO(dao);
+    }
+
+    initEndpoints() {
+        super.initEndpoints();
+        this.initGetAllEndpoint();
+        this.initGetByIdEndpoint();
+        this.initCreateEndpoint();
+        this.initUpdateEndpoint();
+        this.initDeleteEndpoint();
     }
 
     /**
-     * Initialize CRUD endpoints
+     * Init get all endpoint - GET '/'
      */
-    initEndpoints() {
-        this.router.use('/ping', (req, res) => {
-            return res.status(200).send('Pong');
+    initGetAllEndpoint() {
+        this.router.get('/', (req, res) => {
+
+        });
+    }
+
+    /**
+     * Init get by id endpoint - GET '/:id'
+     */
+    initGetByIdEndpoint() {
+        this.router.get('/:id', (req, res) => {
+
+        });
+    }
+
+    /**
+     * Init create entity endpoint - POST '/'
+     */
+    initCreateEndpoint() {
+        this.router.post('/', (req, res) => {
+
         })
     }
 
     /**
-     * Initialize additional endpoints
-     * @abstract
+     * Init update entity endpoint - PUT '/:id'
      */
-    initAdditionalEndpoints() {}
+    initUpdateEndpoint() {
+        this.router.put('/:id', (req, res) => {
+
+        });
+    }
 
     /**
-     * Returns Router
-     * @return {Express.Router}
+     * Init delete entity endpoint - DELETE '/:id'
      */
-    getRouter() {
-        return this.router;
+    initDeleteEndpoint() {
+        this.router.delete('/:id', (req, res) => {
+
+        });
+    }
+
+    setDAO(dao) {
+        this.DAO = dao;
+    }
+
+    getDAO() {
+        return this.DAO;
     }
 }
 
-module.exports = EndpointRouter;
+module.exports.CRUDEndpoint = CRUDEndpoint;
 </code></pre>
         </article>
     </section>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>api/router/EndpointRouter.js - Documentation</title>
+    <title>constants/tables.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">api/router/EndpointRouter.js</h1>
+    <h1 class="page-title">constants/tables.js</h1>
     
 
     
@@ -39,51 +39,25 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const {Errors} = require('../../constants');
-const Router = require('express').Router;
-
-/**
- * Endpoint handler - basic router
+            <pre class="prettyprint source linenums"><code>/**
+ *  @module Tables
  */
-class EndpointRouter {
 
-    /**
-     * Endpoint handler constructor
-     */
-    constructor() {
-        if (new.target === EndpointRouter) {
-            throw new Error(Errors.AbstractClassConstructor('[EndpointRouter] - Don\'t create EndpointRouter directly'));
-        }
-        this.router = new Router();
-        this.initEndpoints();
-        this.initAdditionalEndpoints();
-    }
+const USER_TABLE_NAME = 'user';
+const ACCOUNT_TABLE_NAME = 'accounts';
+const ROLE_TABLE_NAME = 'role';
+const PERMISSION_TABLE_NAME = 'permission';
+const ROLE_TO_PERMISSION_TABLE_NAME = 'roleToPermission';
 
-    /**
-     * Initialize CRUD endpoints
-     */
-    initEndpoints() {
-        this.router.use('/ping', (req, res) => {
-            return res.status(200).send('Pong');
-        })
-    }
+const TABLES = {
+    USER_TABLE_NAME,
+    ACCOUNT_TABLE_NAME,
+    ROLE_TABLE_NAME,
+    PERMISSION_TABLE_NAME,
+    ROLE_TO_PERMISSION_TABLE_NAME
+};
 
-    /**
-     * Initialize additional endpoints
-     * @abstract
-     */
-    initAdditionalEndpoints() {}
-
-    /**
-     * Returns Router
-     * @return {Express.Router}
-     */
-    getRouter() {
-        return this.router;
-    }
-}
-
-module.exports = EndpointRouter;
+module.exports = TABLES;
 </code></pre>
         </article>
     </section>

@@ -42,4 +42,4 @@ class EndpointRouter {
     }
 }
 
-modules.exports = EndpointRouter;
+module.exports = EndpointRouter;

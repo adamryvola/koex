@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>api/router/EndpointRouter.js - Documentation</title>
+    <title>DBFactory - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,64 +29,336 @@
 
 <div id="main">
     
-    <h1 class="page-title">api/router/EndpointRouter.js</h1>
+    <h1 class="page-title">DBFactory</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const {Errors} = require('../../constants');
-const Router = require('express').Router;
+        
+    
+</header>
 
-/**
- * Endpoint handler - basic router
- */
-class EndpointRouter {
+<article>
+    <div class="container-overview">
+    
+        
 
-    /**
-     * Endpoint handler constructor
-     */
-    constructor() {
-        if (new.target === EndpointRouter) {
-            throw new Error(Errors.AbstractClassConstructor('[EndpointRouter] - Don\'t create EndpointRouter directly'));
-        }
-        this.router = new Router();
-        this.initEndpoints();
-        this.initAdditionalEndpoints();
-    }
+        
+    
+    </div>
 
-    /**
-     * Initialize CRUD endpoints
-     */
-    initEndpoints() {
-        this.router.use('/ping', (req, res) => {
-            return res.status(200).send('Pong');
-        })
-    }
+    
 
-    /**
-     * Initialize additional endpoints
-     * @abstract
-     */
-    initAdditionalEndpoints() {}
+    
 
-    /**
-     * Returns Router
-     * @return {Express.Router}
-     */
-    getRouter() {
-        return this.router;
-    }
-}
+    
 
-module.exports = EndpointRouter;
-</code></pre>
-        </article>
-    </section>
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="~DBFactory"><span class="type-signature">(inner) </span>DBFactory<span class="signature">(knexFile)</span><span class="type-signature"> &rarr; {DBFactoryObject}</span></h4>
+
+    
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>BasicModel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="BasicModel.html">BasicModel</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Basic model implementation</p></td>
+        </tr>
+
+        
+
+    
+
+        <tr>
+            
+                <td class="name"><code>PublicModel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="PublicModel.html">PublicModel</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Public model implementation</p></td>
+        </tr>
+
+        
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Model</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Objection.Model</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Objection model implementation</p></td>
+        </tr>
+
+        
+
+    
+
+        <tr>
+            
+                <td class="name"><code>knex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Knex</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>knex instance</p></td>
+        </tr>
+
+        
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_db_DBFactory.js.html">api/db/DBFactory.js</a>, <a href="api_db_DBFactory.js.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>knexFile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>path to knex file</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>DBFactoryObject</code></span>
+
+
+    </dd>
+</dl>
+
+
+    
+</div>
+
+
+
+</div>
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

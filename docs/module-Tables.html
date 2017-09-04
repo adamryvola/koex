@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>api/router/EndpointRouter.js - Documentation</title>
+    <title>Tables - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,64 +29,51 @@
 
 <div id="main">
     
-    <h1 class="page-title">api/router/EndpointRouter.js</h1>
+    <h1 class="page-title">Tables</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const {Errors} = require('../../constants');
-const Router = require('express').Router;
+        
+    
+</header>
 
-/**
- * Endpoint handler - basic router
- */
-class EndpointRouter {
+<article>
+    <div class="container-overview">
+    
+        
 
-    /**
-     * Endpoint handler constructor
-     */
-    constructor() {
-        if (new.target === EndpointRouter) {
-            throw new Error(Errors.AbstractClassConstructor('[EndpointRouter] - Don\'t create EndpointRouter directly'));
-        }
-        this.router = new Router();
-        this.initEndpoints();
-        this.initAdditionalEndpoints();
-    }
+        
+    
+    </div>
 
-    /**
-     * Initialize CRUD endpoints
-     */
-    initEndpoints() {
-        this.router.use('/ping', (req, res) => {
-            return res.status(200).send('Pong');
-        })
-    }
+    
 
-    /**
-     * Initialize additional endpoints
-     * @abstract
-     */
-    initAdditionalEndpoints() {}
+    
 
-    /**
-     * Returns Router
-     * @return {Express.Router}
-     */
-    getRouter() {
-        return this.router;
-    }
-}
+    
 
-module.exports = EndpointRouter;
-</code></pre>
-        </article>
-    </section>
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

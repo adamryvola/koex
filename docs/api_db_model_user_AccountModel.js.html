@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>api/router/EndpointRouter.js - Documentation</title>
+    <title>api/db/model/user/AccountModel.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">api/router/EndpointRouter.js</h1>
+    <h1 class="page-title">api/db/model/user/AccountModel.js</h1>
     
 
     
@@ -39,51 +39,67 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const {Errors} = require('../../constants');
-const Router = require('express').Router;
+            <pre class="prettyprint source linenums"><code>const BasicModel = require('../BasicModel');
+const {Model} = require('../../DBFactory');
+const TABLES = require('../../../../constants/tables');
+const UserModel = require('./UserModel');
+const _ = require('lodash');
 
 /**
- * Endpoint handler - basic router
+ * AccountModel implementation of default accnout database entity
+ * @augments BasicModel
  */
-class EndpointRouter {
+class AccountModel extends BasicModel {
+
+    static get tableName() {
+        return TABLES.ACCOUNT_TABLE_NAME;
+    }
 
     /**
-     * Endpoint handler constructor
+     * JsonSchema getter merge account schema with super class schema
+     * @type {Object}
+     * @property {string} accessToken AccessToken (short term)
+     * @property {string} refreshToken Refresh token (long term)
+     * @property {string} email user email
+     * @property {string} provider identity provider (e.g. GOOGLE)
+     * @property {string} subject user identifier in 3rd party system
+     * @property {number} userId owner of account
      */
-    constructor() {
-        if (new.target === EndpointRouter) {
-            throw new Error(Errors.AbstractClassConstructor('[EndpointRouter] - Don\'t create EndpointRouter directly'));
+    static get jsonSchema() {
+        return _.merge(super.jsonSchema, {
+            properties: {
+                accessToken: {type: 'string'},
+                refreshToken: {type: 'string'},
+                email: {type: 'string'},
+                provider: {type: 'string'},
+                subject: {type: 'string'},
+                userId: {type: 'integer'}
+
+        }});
+    }
+
+    /**
+     * Account relations mapping
+     * @type {Object}
+     * @property {UserModel} user account owner
+     */
+    static get relationMappings() {
+        return {
+            user: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: UserModel,
+                join: {
+                    from: `${TABLES.ACCOUNT_TABLE_NAME}.userId`,
+                    to: `${TABLES.USER_TABLE_NAME}.id`
+                }
+            },
         }
-        this.router = new Router();
-        this.initEndpoints();
-        this.initAdditionalEndpoints();
     }
 
-    /**
-     * Initialize CRUD endpoints
-     */
-    initEndpoints() {
-        this.router.use('/ping', (req, res) => {
-            return res.status(200).send('Pong');
-        })
-    }
-
-    /**
-     * Initialize additional endpoints
-     * @abstract
-     */
-    initAdditionalEndpoints() {}
-
-    /**
-     * Returns Router
-     * @return {Express.Router}
-     */
-    getRouter() {
-        return this.router;
-    }
 }
 
-module.exports = EndpointRouter;
+module.exports = AccountModel;
+
 </code></pre>
         </article>
     </section>
