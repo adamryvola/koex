@@ -61,7 +61,9 @@ class CRUDEndpoint extends EndpointRouter{
      */
     initCreateEndpoint() {
         this.router.post('/', (req, res) => {
-
+            return this.getDAO().create(req.body).then(user => {
+                return res.status(200).send(user);
+            })
         })
     }
 

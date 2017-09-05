@@ -112,19 +112,24 @@ class BasicDAO {
      */
     create(object, context) {
         if (!object) {
+            console.log('[BasicDAO] create error', 'NO INCOMMING OBJECT - REJECT');
             return Promise.reject(new Error(Errors.InvalidArguments));
         }
-        return this.getModel().makeQuery(trx =>
-            this.createQuery(trx, context).insertGraph({})
-                .then(entity => {
-                    object.id = entity.id;
-                    return this.createQuery(trx, context).upsertGraph(object, options.UpsertOptions)
-                })
-                .then(savedObject => this.getById(savedObject.id, context))
-                .catch(err => {
-                    console.log('[BasicDAO] create error', err);
-                    Promise.reject(new Error(Errors.CreateEntityFailed(err.message)));
-                })
+        return this.getModel().makeQuery(trx => {
+                console.log('[BasicDAO] create', 'go to create query');
+                return this.createQuery(trx, context).insertGraph({})
+                    .then(entity => {
+                        console.log('[BasicDAO] create', 'new entity created', entity);
+                        object.id = entity.id;
+                        console.log('[BasicDAO] create', 'Go to upsert');
+                        return this.createQuery(trx, context).upsertGraph(object, options.UpsertOptions)
+                    })
+                    .then(savedObject => this.getById(savedObject.id, context))
+                    .catch(err => {
+                        console.log('[BasicDAO] create error', err);
+                        Promise.reject(new Error(Errors.CreateEntityFailed(err.message)));
+                    })
+            }
         );
     }
 
