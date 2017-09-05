@@ -2,7 +2,7 @@
  * @module DBFactory
  */
 const Model = require('objection').Model;
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'production';
 const Knex = require('knex');
 
 /**
