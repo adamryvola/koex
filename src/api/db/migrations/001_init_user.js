@@ -12,18 +12,7 @@ const up = (kn, Promise) => {
             table.string('salt');
         });
 
-        const initAccountTable = () => knex.schema.createTable(TABLES.ACCOUNT_TABLE_NAME, table => {
-            initBasicModelTable(table);
-            table.string('accessToken');
-            table.string('refreshToken');
-            table.string('email');
-            table.string('provider');
-            table.string('subject');
-            table.integer('userId').references('id').inTable(TABLES.USER_TABLE_NAME);
-        });
-
         return initUserTable()
-            .then(initAccountTable())
 
     })
 };
