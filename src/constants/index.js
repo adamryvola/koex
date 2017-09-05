@@ -9,4 +9,4 @@ const options = {
 
 module.exports.options = options;
 module.exports.Errors = require('./errors');
-module.exports.migations = require('./migrations').migrations;
+module.exports.migrations = require('./migrations').migrations;
