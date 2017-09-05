@@ -1,6 +1,5 @@
 const PublicModel = require('../PublicModel');
 const TABLES = require('../../../../constants/tables');
-const {Model} = require('../../DBFactory');
 const AccountModel = require('./AccountModel');
 const _ = require('lodash');
 
@@ -41,7 +40,7 @@ class UserModel extends PublicModel {
     static get relationMappings() {
         return {
             accounts: {
-                relation: Model.HasManyRelation,
+                relation: this.HasManyRelation,
                 modelClass: AccountModel,
                 join: {
                     from: `${TABLES.USER_TABLE_NAME}.id`,
