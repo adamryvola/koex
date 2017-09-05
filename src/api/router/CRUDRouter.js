@@ -47,7 +47,7 @@ class CRUDEndpoint extends EndpointRouter{
                 if (user) {
                     return res.status(200).send(user);
                 } else {
-                    return res.status(404);
+                    return res.status(404).send({success: false, message: 'Not found'});
                 }
             }).catch(err => {
                 //TODO error reaction
