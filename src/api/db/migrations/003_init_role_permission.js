@@ -4,12 +4,12 @@ const {initBasicModelTable} = require('../../../constants/migrations');
 const up = (kn, Promise) => {
     return kn.transaction(knex => {
 
-        const initRoleTable = () => knex.schema.createTable(TABLES.ACCOUNT_TABLE_NAME, table => {
+        const initRoleTable = () => knex.schema.createTable(TABLES.ROLE_TABLE_NAME, table => {
             initBasicModelTable(table);
             table.string('name');
         });
 
-        const initPermissionTable = () => knex.schema.createTable(TABLES.ACCOUNT_TABLE_NAME, table => {
+        const initPermissionTable = () => knex.schema.createTable(TABLES.PERMISSION_TABLE_NAME, table => {
             initBasicModelTable(table);
             table.string('name');
         });
