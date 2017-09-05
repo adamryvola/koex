@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Tables - Documentation</title>
+    <title>api/db/dao/user/UserDAO.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,51 +29,29 @@
 
 <div id="main">
     
-    <h1 class="page-title">Tables</h1>
+    <h1 class="page-title">api/db/dao/user/UserDAO.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const BasicDAO = require('../BasicDAO');
+const {UserModel} = require('../../model/user');
 
-<article>
-    <div class="container-overview">
-    
-        
+/**
+ * UserDAO - BasicDAO implementation for @link[UserModel] entity
+ * @augments BasicDAO
+ */
+class UserDAO extends BasicDAO {
 
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+}
+module.exports = new UserDAO(UserModel);</code></pre>
+        </article>
+    </section>
 
 
 

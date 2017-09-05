@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Tables - Documentation</title>
+    <title>api/router/user/UserRouter.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,51 +29,30 @@
 
 <div id="main">
     
-    <h1 class="page-title">Tables</h1>
+    <h1 class="page-title">api/router/user/UserRouter.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const CRUDRouter = require('../CRUDRouter');
+const {UserDAO} = require('../../db/dao/user');
 
-<article>
-    <div class="container-overview">
-    
-        
+/**
+ * UserRouter - router for @link{UserModel} entity, extends @link[CRUDRouter], no new endpoints
+ * @augments CRUDEndpoint
+ */
+class UserRouter extends CRUDRouter {
 
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+}
+module.exports = new UserRouter(UserDAO);
+</code></pre>
+        </article>
+    </section>
 
 
 

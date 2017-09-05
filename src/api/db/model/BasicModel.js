@@ -1,6 +1,6 @@
 const {Model} = require('objection');
 const objection = require('objection');
-const {Errors} = require('../../constants');
+const {Errors} = require('../../../constants');
 
 /**
  * BasicModel implementation with default properties and transactional query creator
@@ -74,7 +74,7 @@ class BasicModel extends Model {
      * @param callback
      * @return {Promise<BasicModel | BasicModel[]>}
      */
-    makeQuery(callback) {
+    static makeQuery(callback) {
         return objection.transaction(this.knex(), transaction => callback(transaction));
     }
 }

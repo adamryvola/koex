@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>BasicDAO - Documentation</title>
+    <title>AccountDAO - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">BasicDAO</h1>
+    <h1 class="page-title">AccountDAO</h1>
     
 
     
@@ -42,10 +42,10 @@
 <header>
     
         <h2>
-        BasicDAO
+        AccountDAO
         </h2>
         
-            <div class="class-description"><p>BasicDAO implementation with standard CRUD operations and query creator</p></div>
+            <div class="class-description"><p>UserDAO - BasicDAO implementation for @link[UserModel] entity</p></div>
         
     
 </header>
@@ -60,15 +60,11 @@
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="BasicDAO"><span class="type-signature">(abstract) </span>new BasicDAO<span class="signature">(model)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="AccountDAO"><span class="type-signature"></span>new AccountDAO<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
 
-
-<div class="description">
-    <p>Constructor with model (required)</p>
-</div>
 
 
 
@@ -103,7 +99,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_db_dao_BasicDAO.js.html">api/db/dao/BasicDAO.js</a>, <a href="api_db_dao_BasicDAO.js.html#line9">line 9</a>
+        <a href="api_db_dao_user_AccountDAO.js.html">api/db/dao/user/AccountDAO.js</a>, <a href="api_db_dao_user_AccountDAO.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -120,58 +116,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>model</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code><a href="BasicModel.html">BasicModel</a></code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <p>model class</p>
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -191,6 +135,17 @@
 </div>
     
     </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="BasicDAO.html">BasicDAO</a></li>
+    </ul>
+
 
     
 
@@ -233,6 +188,11 @@
 
     
 
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="BasicDAO.html#addAndWhere">BasicDAO#addAndWhere</a>
+    </li></ul></dd>
     
 
     
@@ -519,6 +479,11 @@
     
 
     
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="BasicDAO.html#addWhere">BasicDAO#addWhere</a>
+    </li></ul></dd>
+    
 
     
 
@@ -804,6 +769,11 @@
     
 
     
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="BasicDAO.html#create">BasicDAO#create</a>
+    </li></ul></dd>
+    
 
     
 
@@ -1011,6 +981,11 @@
     
 
     
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="BasicDAO.html#createQuery">BasicDAO#createQuery</a>
+    </li></ul></dd>
+    
 
     
 
@@ -1197,6 +1172,11 @@
     
 
     
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="BasicDAO.html#getAll">BasicDAO#getAll</a>
+    </li></ul></dd>
+    
 
     
 
@@ -1374,6 +1354,11 @@
 
     
 
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="BasicDAO.html#getByCriteria">BasicDAO#getByCriteria</a>
+    </li></ul></dd>
     
 
     
@@ -1682,6 +1667,11 @@
     
 
     
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="BasicDAO.html#getByField">BasicDAO#getByField</a>
+    </li></ul></dd>
+    
 
     
 
@@ -1989,6 +1979,11 @@
     
 
     
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="BasicDAO.html#getById">BasicDAO#getById</a>
+    </li></ul></dd>
+    
 
     
 
@@ -2192,6 +2187,11 @@
 
     
 
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="BasicDAO.html#remove">BasicDAO#remove</a>
+    </li></ul></dd>
     
 
     
@@ -2400,6 +2400,11 @@
     
 
     
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="BasicDAO.html#returnResult">BasicDAO#returnResult</a>
+    </li></ul></dd>
+    
 
     
 
@@ -2559,6 +2564,11 @@
 
     
 
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="BasicDAO.html#update">BasicDAO#update</a>
+    </li></ul></dd>
     
 
     

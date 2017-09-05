@@ -29,7 +29,12 @@ class CRUDEndpoint extends EndpointRouter{
      */
     initGetAllEndpoint() {
         this.router.get('/', (req, res) => {
-
+            return this.getDAO().getAll({user: req.user}).then(users => {
+                return res.status(200).send(users);
+            }).catch(err => {
+                //TODO error reaction
+                console.log('[CRUD Router - get all ERROR]', err.message);
+            })
         });
     }
 
@@ -38,7 +43,12 @@ class CRUDEndpoint extends EndpointRouter{
      */
     initGetByIdEndpoint() {
         this.router.get('/:id', (req, res) => {
-
+            return this.getDAO().getById(req.params.id, {user: req.user}).then(user => {
+                return res.status(200).send(user);
+            }).catch(err => {
+                //TODO error reaction
+                console.log('[CRUD Router - get by id ERROR]', err.message);
+            })
         });
     }
 
@@ -78,4 +88,4 @@ class CRUDEndpoint extends EndpointRouter{
     }
 }
 
-module.exports.CRUDEndpoint = CRUDEndpoint;
+module.exports = CRUDEndpoint;

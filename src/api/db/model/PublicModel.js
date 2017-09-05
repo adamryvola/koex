@@ -1,4 +1,4 @@
-const BasicModel = require('../BasicModel');
+const BasicModel = require('./BasicModel');
 const _ = require('lodash');
 const crypto = require("crypto");
 
