@@ -44,7 +44,11 @@ class CRUDEndpoint extends EndpointRouter{
     initGetByIdEndpoint() {
         this.router.get('/:id', (req, res) => {
             return this.getDAO().getById(req.params.id, {user: req.user}).then(user => {
-                return res.status(200).send(user);
+                if (user) {
+                    return res.status(200).send(user);
+                } else {
+                    return res.status(404);
+                }
             }).catch(err => {
                 //TODO error reaction
                 console.log('[CRUD Router - get by id ERROR]', err.message);
