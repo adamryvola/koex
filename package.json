@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "jsdoc": "^3.5.4",
-    "minami": "^1.2.3"
+    "minami": "^1.2.3",
+    "mocha": "^3.5.0"
   }
 }

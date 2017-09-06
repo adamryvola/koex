@@ -2,18 +2,63 @@
 #### (adane framework)
 
 This library provides implementation of basic classes and common parts for each backend and client.
-Everything in API part is based on Express.js (Routes). Everything in DB part is designed for Objection.js (model implementation or query services - DAO).
+Everything in API part is based on Express.js (Routes). Everything in DB part is designed for Objection.js (model implementation, query services - DAO or migrations).
 
-## How to use?
-* Each model should extend BasicModel or PublicModel (PM is BM extension), tutorial: 
-    * add table name into constants 
-    * implement tableName getter
-    * implement jsonSchema getter - merge new schema with super class schema
-    * implement relationMappings getter (optional)
-* Each route should extend EndpointRouter and each entity-route should extend CRUDRoute
-    * EndpointRouter - it creates Express.Router instance and add test endpoint '/ping''
-    * CRUDRouter - it extends EndpointRouter and add CRUD Routes with DAO methods calling
-        * you can override each route calling (e.g. POST /:id -> override initCreateEndpoint)
-    * it the end just use getRouter() method and add it as middleware into root router
-        * e.g. rootRouter.use('/accounts', require('./AccountsRouter').getRouter())
+## How to use?        
+### Custom model, dao and router implementation
+
+```javascript
+//Class
+// This custom model has created_at, created_by, updated_at, updated_by, uuid attributes
+class CustomModel extends PublicModel {
+    
+    static get tableName() {
+        return 'CUSTOM_MODEL';
+    }
+    
+    static get jsonSchema() {
+        return _merge(super.jsonSchema, {
+            properties: {
+                myCustomAttribyte: {type: 'string'}
+            }
+        })
+    }
+}
+
+//DAO
+// This DAO has standard CRUD operations implemented
+class CustomDAO extends BasicDao {
+    
+}
+module.exports = new CustomDAO(CustomModel);
+
+//Router
+// This Router has standard CRUD endpoints implemented
+class CustomRouter extends CRUDRouter {
+    initAdditionalEndpoints() {
+        this.getRouter().get('/custom-endpoint', (req, res) => {
+            res.status(200).send('Hello from custom endpoint');
+        })
+    }
+}
+module.exports = new CustomRouter(CustomDAO);
+
+//Add router as middleware for apress app
+const CustomRouter = require('./CustomRouter').getRouter();
+const app = new Express();
+app.use('/custom-entityu', CustomRouter);
+
+
+//Migration - knex migration
+const up = (kn, Promise) => {
+    return kn.transaction(knex => {
+
+        const initCustomTable = () =>  knex.schema.createTable('CUSTOM_MODEL', table => {
+            initPublicModelTable(table);
+            table.string('customAttribute');
+        });
+        return initUserTable()
+    })
+};
+```
     
