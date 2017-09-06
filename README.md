@@ -1,8 +1,17 @@
-# ADANE-FW
-#### (adane framework)
+# KOEX.JS
+#### [knex.js](http://knexjs.org/), [objection.js](vincit.github.io/objection.js), [express](https://expressjs.com/)
+
+* Basic model
+* Basic data access object implementation
+* CRUD express router implementation
+
+##### Requirements
+* `npm install --save knex`
+* `npm install --save objection`
+* `npm install --save express`
 
 This library provides implementation of basic classes and common parts for each backend and client.
-Everything in API part is based on Express.js (Routes). Everything in DB part is designed for Objection.js (model implementation, query services - DAO or migrations).
+Everything in API part is based on Express.js (Routes). Everything in DB part is designed for Objection.js and Knex.js (model implementation, query services - DAO or migrations).
 
 ## How to use?   
 
@@ -70,7 +79,7 @@ const up = (kn, Promise) => {
 ### Use pre-defined models (e.g. User, Permission, Account, ...)
 ```javascript
 //UserModel, DAO and Router are done - we need just use migrations and router
-const UserRouter = require('adan-fw').API.UserRouter.getRouter();
+const UserRouter = require('adane-fw').API.UserRouter.getRouter();
 
 const app = new Express();
 app.use('/user', UserRouter);
