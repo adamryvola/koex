@@ -24,6 +24,7 @@ class CustomModel extends PublicModel {
         })
     }
 }
+module.exports = CustomModel;
 
 //DAO
 // This DAO has standard CRUD operations implemented
@@ -46,18 +47,16 @@ module.exports = new CustomRouter(CustomDAO);
 //Add router as middleware for apress app
 const CustomRouter = require('./CustomRouter').getRouter();
 const app = new Express();
-app.use('/custom-entityu', CustomRouter);
+app.use('/custom-entity', CustomRouter);
 
 
 //Migration - knex migration
 const up = (kn, Promise) => {
     return kn.transaction(knex => {
-
-        const initCustomTable = () =>  knex.schema.createTable('CUSTOM_MODEL', table => {
+        return () =>  knex.schema.createTable('CUSTOM_MODEL', table => {
             initPublicModelTable(table);
             table.string('customAttribute');
         });
-        return initUserTable()
     })
 };
 ```
