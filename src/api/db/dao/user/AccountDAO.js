@@ -2,7 +2,7 @@ const BasicDAO = require('../BasicDAO');
 const {AccountModel} = require('../../model/user');
 
 /**
- * UserDAO - BasicDAO implementation for @link[UserModel] entity
+ * AccountDAO - BasicDAO implementation for @link[AccountModel] entity
  * @augments BasicDAO
  */
 class AccountDAO extends BasicDAO {

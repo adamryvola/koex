@@ -5,7 +5,16 @@
   "main": "src/index.js",
   "scripts": {
     "docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
-    "test": "test"
+    "test": "better-npm-run test"
+  },
+  "betterScripts": {
+    "test": {
+      "command": "mocha --recursive",
+      "env": {
+        "NODE_ENV": "test",
+        "PORT": 3000
+      }
+    }
   },
   "keywords": [
     "framework",
@@ -16,6 +25,7 @@
   "author": "Adam Ryvola <ryvolaadam@gmail.com> (http://www.adane.cz)",
   "license": "ISC",
   "dependencies": {
+    "debug": "^3.0.1",
     "express": "^4.15.4",
     "knex": "^0.13.0",
     "lodash": "^4.17.4",
@@ -23,7 +33,12 @@
     "pg": "^7.3.0"
   },
   "devDependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
     "jsdoc": "^3.5.4",
+    "knex-logger": "^0.1.0",
     "minami": "^1.2.3",
     "mocha": "^3.5.0"
   }

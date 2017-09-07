@@ -1,6 +1,7 @@
 const PublicModel = require('../PublicModel');
 const TABLES = require('../../../../constants/tables');
 const AccountModel = require('./AccountModel');
+const RoleModel = require('../access/RoleModel');
 const _ = require('lodash');
 
 /**
@@ -11,6 +12,14 @@ class UserModel extends PublicModel {
 
     static get tableName() {
         return TABLES.USER_TABLE_NAME;
+    }
+
+    /**
+     * Relations getter
+     * @return {String} list of relations names
+     */
+    static get relations() {
+        return '[accounts, role]';
     }
 
     /**
@@ -27,7 +36,8 @@ class UserModel extends PublicModel {
                 name: {type: 'string'},
                 email: {type: 'string'},
                 password: {type: 'string'},
-                salt: {type: 'string'}
+                salt: {type: 'string'},
+                roleId: {type: 'number'}
             }
         });
     }
@@ -47,6 +57,14 @@ class UserModel extends PublicModel {
                     to: `${TABLES.ACCOUNT_TABLE_NAME}.userId`
                 }
             },
+            role: {
+                relation: this.BelongsToOneRelation,
+                modelClass: RoleModel,
+                join: {
+                    from: `${TABLES.USER_TABLE_NAME}.roleId`,
+                    to: `${TABLES.ROLE_TABLE_NAME}.id`
+                }
+            }
         }
     }
 

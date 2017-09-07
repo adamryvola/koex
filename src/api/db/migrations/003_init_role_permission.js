@@ -19,9 +19,14 @@ const up = (kn, Promise) => {
             table.integer('permissionId').references('id').inTable(TABLES.PERMISSION_TABLE_NAME);
         });
 
+        const initUserRoleRelation = () => knex.schema.table(TABLES.USER_TABLE_NAME, table => {
+            table.integer('roleId').references('id').inTable(TABLES.ROLE_TABLE_NAME);
+        });
+
         return initRoleTable()
             .then(initPermissionTable)
             .then(initRoleToPermissionTable)
+            .then(initUserRoleRelation)
     })
 };
 

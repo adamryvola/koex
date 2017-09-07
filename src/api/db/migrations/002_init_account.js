@@ -11,7 +11,7 @@ const up = (kn, Promise) => {
             table.string('email');
             table.string('provider');
             table.string('subject');
-            table.integer('userId').references('id').inTable(TABLES.USER_TABLE_NAME);
+            table.integer('userId').references('id').inTable(TABLES.USER_TABLE_NAME).onDelete('CASCADE');
         });
 
         return initAccountTable();

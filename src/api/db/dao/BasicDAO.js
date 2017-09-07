@@ -1,6 +1,7 @@
 const objection = require('objection');
 const _ = require('lodash');
 const {Errors, options} = require('../../../constants');
+const debug = require('debug')('[BasicDAO]');
 
 /**
  * BasicDAO implementation with standard CRUD operations and query creator
@@ -16,7 +17,7 @@ class BasicDAO {
      */
     constructor(model) {
         if (new.target === BasicDAO) {
-            throw Error(Errors.AbstractClassConstructor('[BasicDAO] - Don\'t create BasicDAO directly'));
+            throw Error(Errors.AbstractClassConstructor('BasicDAO'));
         }
         this.setModel(model);
         return this;
@@ -38,11 +39,14 @@ class BasicDAO {
      * @returns {BasicModel} Promise that returns entity
      */
     getById(id, context) {
-        return this.getModel().makeQuery((trx) => this.createQuery(trx, context).findById(id))
+        if (!id) {
+            throw new Error(Errors.InvalidArguments('BasicDAO.getById', 'id'));
+        }
+        return this.getModel().makeQuery((trx) => this.createQuery(trx, context).findById(id)
             .catch(err => {
-                console.log('[BasicDAO] getById error', err);
-                Promise.reject(new Error(Errors.GetByIdFailed(err.message)))
-            })
+                debug('GgetById error', err.message);
+                throw new Error(Errors.GetByIdFailed('BasicDAO.getById'));
+            }));
     }
 
     /**
@@ -58,8 +62,8 @@ class BasicDAO {
     getByField(field, context) {
         return this.getModel().makeQuery((trx) => this.createQuery(trx, context).where(field.name, field.operation, field.value))
             .catch(err => {
-                console.log('[BasicDAO] getByField error', err);
-                Promise.reject(new Error(Errors.GetByFieldFailed(err.message)))
+                debug('GetByField', err.message);
+                throw new Error(Errors.GetByFieldFailed('BasicDAO'));
             })
     }
 
@@ -72,8 +76,8 @@ class BasicDAO {
     getAll(context) {
         return this.getModel().makeQuery((trx) => this.createQuery(trx, context))
             .catch(err => {
-                console.log('[BasicDAO] getAll error', err);
-                Promise.reject(new Error(Errors.GetAllFailed(err.message)))
+                debug('GetAll', err.message);
+                throw new Error(Errors.GetAllFailed('BasicDAO'));
             })
     }
 
@@ -98,8 +102,8 @@ class BasicDAO {
             }
             return this.returnResult(query)
         }).catch(err => {
-            console.log('[BasicDAO] getByCriteria error', err);
-            Promise.reject(new Error(Errors.GetByCriteriaFailed(err.message)));
+            debug('GetByCriteria', err.message);
+            throw new Error(Errors.GetByCriteriaFailed('BasicDAO'));
         })
     }
 
@@ -112,22 +116,17 @@ class BasicDAO {
      */
     create(object, context) {
         if (!object) {
-            console.log('[BasicDAO] create error', 'NO INCOMMING OBJECT - REJECT');
-            return Promise.reject(new Error(Errors.InvalidArguments));
+            throw new Error(Errors.InvalidArguments('BasicDAO.create', 'object'));
         }
         return this.getModel().makeQuery(trx => {
-                console.log('[BasicDAO] create', 'go to create query');
                 return this.createQuery(trx, context).insertGraph({})
                     .then(entity => {
-                        console.log('[BasicDAO] create', 'new entity created', entity);
                         object.id = entity.id;
-                        console.log('[BasicDAO] create', 'Go to upsert');
                         return this.createQuery(trx, context).upsertGraph(object, options.UpsertOptions)
                     })
-                    .then(savedObject => this.getById(savedObject.id, context))
                     .catch(err => {
-                        console.log('[BasicDAO] create error', err);
-                        Promise.reject(new Error(Errors.CreateEntityFailed(err.message)));
+                        debug('Create', err.message);
+                        throw new Error(Errors.CreateEntityFailed('BasicDAO'));
                     })
             }
         );
@@ -142,14 +141,13 @@ class BasicDAO {
      */
     update(object, context) {
         if (!object) {
-            return Promise.reject(new Error(Errors.InvalidArguments));
+            throw new Error(Errors.InvalidArguments('BasicDAO.update', 'object'));
         }
         return this.getModel().makeQuery(trx =>
             this.createQuery(trx, context).upsertGraph(object, options.UpsertOptions)
-                .then(savedObject => this.getById(savedObject.id, context))
                 .catch(err => {
-                    console.log('[BasicDAO] update error', err);
-                    Promise.reject(new Error(Errors.UpdateEntityFailed(err.message)));
+                    debug('Update', err.message);
+                    throw new Error(Errors.UpdateEntityFailed('BasicDAO'));
                 })
         );
     }
@@ -162,14 +160,14 @@ class BasicDAO {
      * @returns {Object} result
      */
     remove(id, context) {
-        if (!object) {
-            return Promise.reject(new Error(Errors.InvalidArguments));
+        if (!id) {
+            throw new Error(Errors.InvalidArguments('BasicDAO.remove', 'id'));
         }
-        return this.getModel().makeQuery(trx => this.createQuery(trx, context).deleteById(id))
+        return this.getModel().query().deleteById(id)
             .catch(err => {
-                console.log('[BasicDAO] delete error', err);
-                Promise.reject(new Error(Errors.RemoveEntityFailed(err.message)));
-            })
+                debug('Remove', err.message);
+                throw new Error(Errors.RemoveEntityFailed(err.message));
+            });
     }
 
     /**
@@ -179,7 +177,7 @@ class BasicDAO {
      * @returns {Objection.QueryBuilder<BasicModel>} Transactional query builder transactional with request context injected
      */
     createQuery(trx, context) {
-        return this.getModel().query(trx).context(context);
+        return this.getModel().query(trx).eager(this.getModel().relations).context(context);
     }
 
     /**
@@ -219,7 +217,7 @@ class BasicDAO {
                 return result;
             })
             .catch((err) => {
-                console.log('[BasicDAO] Return result error', err);
+                debug('Return result', err.message);
                 throw err;
             });
     }

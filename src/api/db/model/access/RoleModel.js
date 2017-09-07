@@ -1,5 +1,5 @@
 const BasicModel = require('../BasicModel');
-const {Model} = require('../../DBFactory');
+const UserModel = require('../user/UserModel');
 const PermissionModel = require('./PermissionModel');
 const TABLES = require('../../../../constants/tables');
 const _ = require('lodash');
@@ -34,7 +34,7 @@ class RoleModel extends BasicModel {
     static get relationMappings() {
         return {
             permissions: {
-                relation: Model.ManyToManyRelation,
+                relation: this.ManyToManyRelation,
                 modelClass: PermissionModel,
                 join: {
                     from: `${TABLES.ROLE_TABLE_NAME}.id`,

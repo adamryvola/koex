@@ -1,16 +1,17 @@
 const EndpointRouter = require('./EndpointRouter');
 const {Errors} = require('../../constants');
+const debug = require('debug')('[CRUDRoute]');
 
 /**
  * CRUD Endpoint
  * @extends EndpointRouter
  */
-class CRUDEndpoint extends EndpointRouter{
+class CRUDEndpoint extends EndpointRouter {
 
     constructor(dao) {
         super();
         if (new.target === CRUDEndpoint) {
-            throw new Error(Errors.AbstractClassConstructor('[CRUDEndpoint] - Don\'t create CRUDEndpoint directly'));
+            throw new Error(Errors.GetByFieldFailed('CRUDEndpoint'));
         }
         this.setDAO(dao);
     }
@@ -32,8 +33,8 @@ class CRUDEndpoint extends EndpointRouter{
             return this.getDAO().getAll({user: req.user}).then(users => {
                 return res.status(200).send(users);
             }).catch(err => {
-                //TODO error reaction
-                console.log('[CRUD Router - get all ERROR]', err.message);
+                debug('[getAll]', err.message);
+                return this.sendErr(res, 400, err.message);
             })
         });
     }
@@ -47,11 +48,11 @@ class CRUDEndpoint extends EndpointRouter{
                 if (user) {
                     return res.status(200).send(user);
                 } else {
-                    return res.status(404).send({success: false, message: 'Not found'});
+                    return this.sendErr(res, 404, 'Not found');
                 }
             }).catch(err => {
-                //TODO error reaction
-                console.log('[CRUD Router - get by id ERROR]', err.message);
+                debug('[getById]', err.message);
+                return this.sendErr(res, 400, err.message);
             })
         });
     }
@@ -63,6 +64,9 @@ class CRUDEndpoint extends EndpointRouter{
         this.router.post('/', (req, res) => {
             return this.getDAO().create(req.body).then(user => {
                 return res.status(200).send(user);
+            }).catch(err => {
+                debug('[create]', err.message);
+                return this.sendErr(res, 400, err.message);
             })
         })
     }
@@ -72,7 +76,13 @@ class CRUDEndpoint extends EndpointRouter{
      */
     initUpdateEndpoint() {
         this.router.put('/:id', (req, res) => {
-
+            return this.getDAO().update(req.body, {user: req.user})
+                .then(user => {
+                    return res.status(200).send(user);
+                }).catch(err => {
+                    debug('[update]', err.message);
+                    return this.sendErr(res, 400, err.message);
+                });
         });
     }
 
@@ -81,7 +91,17 @@ class CRUDEndpoint extends EndpointRouter{
      */
     initDeleteEndpoint() {
         this.router.delete('/:id', (req, res) => {
-
+            return this.getDAO().remove(req.params.id, {user: req.user}).then(result => {
+                if (result === 0) {
+                    return this.sendErr(res, 404, 'Not found');
+                } else {
+                    return res.status(200).send({success: true});
+                }
+            }).catch(err => {
+                console.log(err.message);
+                debug('[delete]', err.message);
+                return this.sendErr(res, 400, err.message);
+            })
         });
     }
 

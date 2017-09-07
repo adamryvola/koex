@@ -7,5 +7,11 @@ const {UserModel} = require('../../model/user');
  */
 class UserDAO extends BasicDAO {
 
+    create(user, context) {
+        //TODO generate password and salt
+        delete user.rawPassword;
+        return super.create(user, context);
+    }
+
 }
 module.exports = new UserDAO(UserModel);

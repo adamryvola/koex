@@ -1,6 +1,7 @@
 const BasicModel = require('./BasicModel');
 const _ = require('lodash');
 const crypto = require("crypto");
+const {Errors} = require('../../../constants');
 
 /**
  * PublicModel implementation. It generates random hash identifier on insert as 'uuid' attribute
@@ -8,6 +9,13 @@ const crypto = require("crypto");
  * @augments BasicModel
  */
 class PublicModel extends BasicModel {
+
+    constructor() {
+        if (new.target === PublicModel) {
+            throw new Error(Errors.AbstractClassConstructor('PublicModel'));
+        }
+        super();
+    }
 
     /**
      * JsonSchema getter merge PublicModel schema with super class schema

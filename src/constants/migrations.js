@@ -13,7 +13,8 @@ const initBasicModelTable = (table) => {
     table.increments().primary();
     table.integer('createdBy').references('id').inTable(TABLES.USER_TABLE_NAME);
     table.integer('updatedBy').references('id').inTable(TABLES.USER_TABLE_NAME);
-    table.timestamps();
+    table.timestamp('createdAt');
+    table.timestamp('updatedAt');
 };
 
 /**

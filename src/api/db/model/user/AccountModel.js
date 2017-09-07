@@ -1,5 +1,4 @@
 const BasicModel = require('../BasicModel');
-const {Model} = require('../../DBFactory');
 const TABLES = require('../../../../constants/tables');
 const UserModel = require('./UserModel');
 const _ = require('lodash');
@@ -35,24 +34,6 @@ class AccountModel extends BasicModel {
                 userId: {type: 'integer'}
 
         }});
-    }
-
-    /**
-     * Account relations mapping
-     * @type {Object}
-     * @property {UserModel} user account owner
-     */
-    static get relationMappings() {
-        return {
-            user: {
-                relation: Model.BelongsToOneRelation,
-                modelClass: UserModel,
-                join: {
-                    from: `${TABLES.ACCOUNT_TABLE_NAME}.userId`,
-                    to: `${TABLES.USER_TABLE_NAME}.id`
-                }
-            },
-        }
     }
 
 }

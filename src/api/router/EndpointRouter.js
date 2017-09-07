@@ -11,7 +11,7 @@ class EndpointRouter {
      */
     constructor() {
         if (new.target === EndpointRouter) {
-            throw new Error(Errors.AbstractClassConstructor('[EndpointRouter] - Don\'t create EndpointRouter directly'));
+            throw new Error(Errors.GetByFieldFailed('EndpointRouter'));
         }
         this.router = new Router();
         this.initEndpoints();
@@ -39,6 +39,10 @@ class EndpointRouter {
      */
     getRouter() {
         return this.router;
+    }
+
+    sendErr(res, status, message) {
+        return res.status(status).send({success: false, error: message});
     }
 }
 

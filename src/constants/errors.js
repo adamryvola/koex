@@ -2,115 +2,62 @@
  * @module Errors
  */
 
-const INVALID_ARGUMENTS = 'INVALID_ARGUMENTS';
-const CREATE_ENTITY_FAILED = 'CREATE_ENTITY_FAILED';
-const UPDATE_ENTITY_FAILED = 'UPDATE_ENTITY_FAILED';
-const ABSTRACT_CLASS_CONSTRUCTOR = 'ABSTRACT_CLASS_CONSTRUCTOR';
-const GET_BY_ID_FAILED = 'GET_BY_ID_FAILED';
-const GET_BY_FIELD_FAILED ='GET_BY_FIELD_FAILED';
-const GET_ALL_FAILED = 'GET_ALL_FAILED';
-const GET_BY_CRITERIA__FAILED = 'GET_BY_CRITERIA__FAILED';
-const REMOVE_ENTITY_FAILED = 'REMOVE_ENTITY_FAILED';
+/**
+ * Abstract class constructor error message creator
+ * @param source {string} name of class which throwed error
+ */
+const AbstractClassConstructor = source => `Don't create ${source} directly`;
+
 
 /**
- * Custom error creator
- * @param message {string} Error message
- * @param error {error|string} error additional info
- * @param code {string} custom error code
+ * Invalid arguments error message creator
+ * @param source {string} name of class which throwed error
+ * @param params {any} list of invalid arguments
  */
-const CustomError = (message, error, code) => ({message, error, code});
+const InvalidArguments = (source, params) => `Invalid argumens: ${params} in ${source}`;
 
 /**
- * Invalid arguments error object
- * @param error {error|string} error additional info
+ * Get by ID error message creator
+ * @param source {string} name of class which throwed error
  */
-const InvalidArguments = error => ({
-    message: INVALID_ARGUMENTS,
-    error,
-    code: '001'
-});
+const GetByIdFailed = source => `Fetch entity by id in ${source} failed`;
 
 /**
- * Create entity error object
- * @param error {error|string} error additional info
+ * Create entity error message creator
+ * @param source {string} name of class which throwed error
  */
-const CreateEntityFailed = error=> ({
-    message: CREATE_ENTITY_FAILED,
-    error,
-    code: '002'
-});
+const CreateEntityFailed = source => `Create entity in ${source} failed`;
 
 /**
- * Update entity error object
- * @param error {error|string} error additional info
+ * Update entity error message creator
+ * @param source {string} name of class which throwed error
  */
-const UpdateEntityFailed = error => ({
-    message: UPDATE_ENTITY_FAILED,
-    error,
-    code: '003'
-});
+const UpdateEntityFailed = source => `Update entity in ${source} failed`;
 
 /**
- * Abstract class constructor error object
- * @param error {error|string} error additional info
+ * Get by field error message creator
+ * @param source {string} name of class which throwed error
  */
-const AbstractClassConstructor = error => ({
-    message: ABSTRACT_CLASS_CONSTRUCTOR,
-    error,
-    code: '004'
-});
+const GetByFieldFailed = source => `Get entity by field in ${source} failed`;
 
 /**
- * Get by ID error object
- * @param error {error|string} error additional info
+ * Get all error message creator
+ * @param source {string} name of class which throwed error
  */
-const GetByIdFailed = error => ({
-    message: GET_BY_ID_FAILED,
-    error,
-    code: '005'
-});
+const GetAllFailed = source => `Get all entities in ${source} failed`;
 
 /**
- * Get by field error object
- * @param error {error|string} error additional info
+ * Get by criteria error message creator
+ * @param source {string} name of class which throwed error
  */
-const GetByFieldFailed = error => ({
-    message: GET_BY_FIELD_FAILED,
-    error,
-    code: '006'
-});
+const GetByCriteriaFailed = source => `Get entity by criteria in ${source} failed`;
 
 /**
- * Get all error object
- * @param error {error|string} error additional info
+ * Remove entity error message creator
+ * @param source {string} name of class which throwed error
  */
-const GetAllFailed = error => ({
-    message: GET_ALL_FAILED,
-    error,
-    code: '007'
-});
+const RemoveEntityFailed = source => `Remove entity in ${source} failed`;
 
-/**
- * Get by criteria error object
- * @param error {error|string} error additional info
- */
-const GetByCriteriaFailed = error => ({
-    message: GET_BY_CRITERIA__FAILED,
-    error,
-    code: '008'
-});
-
-/**
- * Remove entity error object
- * @param error {error|string} error additional info
- */
-const RemoveEntityFailed = error => ({
-    message: REMOVE_ENTITY_FAILED,
-    error,
-    code: '009'
-});
-
-module.exports.CustomError = CustomError;
 module.exports.InvalidArguments = InvalidArguments;
 module.exports.CreateEntityFailed = CreateEntityFailed;
 module.exports.UpdateEntityFailed = UpdateEntityFailed;

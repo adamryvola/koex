@@ -10,7 +10,7 @@ class BasicModel extends Model {
 
     constructor() {
         if (new.target === BasicModel) {
-            throw new Error(Errors.AbstractClassConstructor('[BasicModel] - Don\'t create BasicModel directly'));
+            throw new Error(Errors.AbstractClassConstructor('BasicModel'));
         }
         super();
     }
@@ -22,7 +22,16 @@ class BasicModel extends Model {
      * @return {String} table name
      */
     static get tableName() {
-        throw new Error(Errors.AbstractClassConstructor('[BasicModel - tableName getter] - Don\'t create BasicModel directly'))
+        throw new Error(Errors.AbstractClassConstructor('BasicModel'));
+    }
+
+    /**
+     * Relations getter
+     * @abstract
+     * @return {String} list of relations names
+     */
+    static get relations() {
+        return '';
     }
 
     /**
@@ -55,8 +64,12 @@ class BasicModel extends Model {
     $beforeInsert(context) {
         this.createdAt = new Date().toISOString();
         this.updatedAt = new Date().toISOString();
-        this.createdBy = context.user.id;
-        this.updatedBy = context.user.id;
+        if (context.user) {
+            this.createdBy = context.user.id;
+            this.updatedBy = context.user.id;
+        } else {
+            console.warn('[Basic model - beforeInsert] No user in context');
+        }
     }
 
     /**
@@ -66,7 +79,11 @@ class BasicModel extends Model {
      */
     $beforeUpdate(options, context) {
         this.updatedAt = new Date().toISOString();
-        this.updatedBy = context.user.id;
+        if (context.user) {
+            this.updatedBy = context.user.id;
+        } else {
+            console.warn('[Basic model - beforeInsert] No user in context');
+        }
     }
 
     /**
