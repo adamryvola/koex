@@ -8,7 +8,6 @@
  */
 const AbstractClassConstructor = source => `Don't create ${source} directly`;
 
-
 /**
  * Invalid arguments error message creator
  * @param source {string} name of class which throwed error

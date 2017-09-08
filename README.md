@@ -1,19 +1,61 @@
 # KOEX.JS
-#### [knex.js](http://knexjs.org/), [objection.js](vincit.github.io/objection.js), [express](https://expressjs.com/)
+#### [Knex.js](http://knexjs.org/), [Objection.js](vincit.github.io/objection.js), [EXpress](https://expressjs.com/)
 
-* Basic model
-* Basic data access object implementation
-* CRUD express router implementation
+In the beginnig of every project you have to do boring work like create basic entity with some basic attributes (e.g. `created_at`, `updated_at`),
+implement CRUD operations and endpoints for every entity or for example implement hashing user password.
+
+This helper library provides all of this and much more for every project! Just take a look..
+
+The best on all of this is, that you can use any part of this library and than change, override or inject you own implementation.
+For example: you want just CRUD router - so use CRUDRouter as express-middleware and inject your own DAO instance - no problem :) 
+
+* Models to extend
+    * BasicModel (`id`, `created_at`, `updated_at`, `updated_by`, `created_by`)
+    * PublicModel (all from BasicModel + `uuid` - public identifier)
+* DAO to extend
+    * BasicDAO with methods: 
+        * `create(object)`
+        * `update(object)`
+        * `remove(id)`
+        * `getAll()`
+        * `getById(id)`
+        * `getByField(field)`
+        * `getByCriteria`
+* Routers to extends
+    * EndpointRouter - contains express.Router instance with '/ping' endpoint for testing
+    * CRUDRouter - contains CRUD routes connected with DAO
+        * `POST '/'` create entity
+        * `PUT '/:id'` update entity
+        * `DELETE '/:id'` delete entity
+        * `GET '/'` get all entities
+        * `GET '/:id'` get entity
+
 
 ##### Requirements
 * `npm install --save knex`
 * `npm install --save objection`
 * `npm install --save express`
 
-This library provides implementation of basic classes and common parts for each backend and client.
-Everything in API part is based on Express.js (Routes). Everything in DB part is designed for Objection.js and Knex.js (model implementation, query services - DAO or migrations).
+This library provides implementation of basic classes and common parts for each backend.
 
-## How to use?   
+Everything in API part is based on Express.js (Router). Everything in DB part is designed for Objection.js models and Knex.js queries (model implementation, query services - DAO or migrations).
+
+## How to use?
+
+## Crete database connection object
+```javascript
+//example for PostgreSql - use you favourite DB
+module.exports = {
+    test: {
+        connection: 'postgres://postgres:test@localhost:5432/koex-test',
+        client: 'pg',
+        migrations: {
+            directory: __dirname + "/src/api/db/migrations",
+            tableName: "version"
+        }
+    },
+};
+```
 
 ## Init - initialize knex database connection
 ```javascript
