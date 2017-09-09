@@ -1,5 +1,5 @@
 const BasicDAO = require('../BasicDAO');
-const {AccountModel} = require('../../model/user');
+const AccountModel = require('../../model/user/AccountModel');
 
 /**
  * AccountDAO - BasicDAO implementation for @link[AccountModel] entity

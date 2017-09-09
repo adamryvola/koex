@@ -28,7 +28,7 @@ const initPublicModelTable = (table) => {
 
 module.exports.initBasicModelTable = initBasicModelTable;
 module.exports.initPublicModelTable = initPublicModelTable;
-module.exports.migrations = {
+module.exports.scripts = {
     user: require('../api/db/migrations/001_init_user'),
     account: require('../api/db/migrations/002_init_account'),
     rolePermission: require('../api/db/migrations/003_init_role_permission')

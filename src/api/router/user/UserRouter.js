@@ -1,5 +1,5 @@
 const CRUDRouter = require('../CRUDRouter');
-const {UserDAO} = require('../../db/dao/user');
+const UserDAO = require('../../db/dao/user/UserDAO');
 
 /**
  * UserRouter - router for @link{UserModel} entity, extends @link[CRUDRouter], no new endpoints
