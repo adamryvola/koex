@@ -60,7 +60,7 @@ class BasicDAO {
      * @returns {BasicModel[]}Promise that returns list of entities
      */
     getByField(field, context) {
-        return this.getModel().makeQuery((trx) => this.createQuery(trx, context).where(field.name, field.operation, field.value))
+        return this.getModel().makeQuery((trx) => this.createQuery(trx, context).skipUndefined().where(field.name, field.operation, field.value))
             .catch(err => {
                 debug('GetByField', err.message);
                 throw new Error(Errors.GetByFieldFailed('BasicDAO'));
