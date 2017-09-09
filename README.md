@@ -64,7 +64,7 @@ module.exports = {
 ## Init - initialize knex database connection
 ```javascript
 //insert path to knex cofiguration file
-require('adane-fw').API.DBFactory(__dirname+'/knexfile.js')
+require('adane-fw').API.DBFactory.init(__dirname+'/knexfile.js')
 ```
      
 ### Custom model, dao and router implementation

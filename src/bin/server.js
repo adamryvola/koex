@@ -1,8 +1,8 @@
 const body = require('body-parser');
 const cookie = require('cookie-parser');
 const knexLogger = require('knex-logger');
-const knex = require('../index').API.DBFactory(__dirname + '/../../knexfile.js').knex;
-
+require('../').API.DBFactory.init(__dirname + '/../../knexfile.js');
+const knex = require('../').API.DBFactory.knex;
 
 const app = require('express')();
 app.use([

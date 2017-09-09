@@ -5,11 +5,29 @@
   "main": "src/index.js",
   "scripts": {
     "docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
-    "test": "better-npm-run test"
+    "test": "better-npm-run test",
+    "prepublish": "npm run docs && npm run test",
+    "dev": "better-npm-run dev",
+    "refresh": "better-npm-run refresh"
   },
   "betterScripts": {
     "test": {
       "command": "mocha --recursive --reporter mochawesome --reporter-options reportDir=./docs/test,reportFilename=index,reportTitle=KOEX.JS,inlineAssets=true",
+      "env": {
+        "NODE_ENV": "test",
+        "PORT": 3000
+      }
+    },
+    "dev": {
+      "command": "node src/bin/server",
+      "env": {
+        "NODE_ENV": "test",
+        "PORT": 3000,
+        "DEBUG": "*"
+      }
+    },
+    "refresh": {
+      "command": "knex migrate:rollback && knex migrate:latest",
       "env": {
         "NODE_ENV": "test",
         "PORT": 3000

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>constants/errors.js - Documentation</title>
+    <title>DBFactory - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,86 +29,258 @@
 
 <div id="main">
     
-    <h1 class="page-title">constants/errors.js</h1>
+    <h1 class="page-title">DBFactory</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @module Errors
- */
+        <h2>
+            <span class="ancestors"><a href="module-DBFactory.html">DBFactory</a>~</span>
+        
+        DBFactory
+        </h2>
+        
+    
+</header>
 
-/**
- * Abstract class constructor error message creator
- * @param source {string} name of class which throwed error
- */
-const AbstractClassConstructor = source => `Don't create ${source} directly`;
+<article>
+    <div class="container-overview">
+    
+        
+<div class="section-method">
 
-/**
- * Invalid arguments error message creator
- * @param source {string} name of class which throwed error
- * @param params {any} list of invalid arguments
- */
-const InvalidArguments = (source, params) => `Invalid argumens: ${params} in ${source}`;
+    
 
-/**
- * Get by ID error message creator
- * @param source {string} name of class which throwed error
- */
-const GetByIdFailed = source => `Fetch entity by id in ${source} failed`;
+    <h4 class="name" id="DBFactory"><span class="type-signature"></span>new DBFactory<span class="signature">(knexFile)</span><span class="type-signature"> &rarr; {DBFactoryObject}</span></h4>
 
-/**
- * Create entity error message creator
- * @param source {string} name of class which throwed error
- */
-const CreateEntityFailed = source => `Create entity in ${source} failed`;
+    
 
-/**
- * Update entity error message creator
- * @param source {string} name of class which throwed error
- */
-const UpdateEntityFailed = source => `Update entity in ${source} failed`;
 
-/**
- * Get by field error message creator
- * @param source {string} name of class which throwed error
- */
-const GetByFieldFailed = source => `Get entity by field in ${source} failed`;
 
-/**
- * Get all error message creator
- * @param source {string} name of class which throwed error
- */
-const GetAllFailed = source => `Get all entities in ${source} failed`;
 
-/**
- * Get by criteria error message creator
- * @param source {string} name of class which throwed error
- */
-const GetByCriteriaFailed = source => `Get entity by criteria in ${source} failed`;
 
-/**
- * Remove entity error message creator
- * @param source {string} name of class which throwed error
- */
-const RemoveEntityFailed = source => `Remove entity in ${source} failed`;
 
-module.exports.InvalidArguments = InvalidArguments;
-module.exports.CreateEntityFailed = CreateEntityFailed;
-module.exports.UpdateEntityFailed = UpdateEntityFailed;
-module.exports.AbstractClassConstructor = AbstractClassConstructor;
-module.exports.GetByIdFailed = GetByIdFailed;
-module.exports.GetByFieldFailed = GetByFieldFailed;
-module.exports.GetAllFailed = GetAllFailed;
-module.exports.GetByCriteriaFailed = GetByCriteriaFailed;
-module.exports.RemoveEntityFailed = RemoveEntityFailed;</code></pre>
-        </article>
-    </section>
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>TODO</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>TODO</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+        
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_db_DBFactory.js.html">api/db/DBFactory.js</a>, <a href="api_db_DBFactory.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>knexFile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>path to knex file</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>DBFactoryObject</code></span>
+
+
+    </dd>
+</dl>
+
+
+    
+</div>
+
+
+
+</div>
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

@@ -1,4 +1,5 @@
-const knex = require('../../src').API.DBFactory(__dirname + '\\..\\..\\knexfile.js').knex;
+require('../../src').API.DBFactory.init(__dirname + '/../../knexfile.js');
+const knex = require('../../src').API.DBFactory.knex;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../src/bin/server');
