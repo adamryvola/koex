@@ -6,8 +6,12 @@ implement CRUD operations and endpoints for every entity or for example implemen
 
 This helper library provides all of this and much more for every project! Just take a look..
 
+Everything in API part is based on Express.js (Router). Everything in DB part is designed for Objection.js models and Knex.js queries (model implementation, query services - DAO and migrations).
+
 The best on all of this is, that you can use any part of this library and than change, override or inject you own implementation.
 For example: you want just CRUD router - so use CRUDRouter as express-middleware and inject your own DAO instance - no problem :) 
+
+## Classes ready-to-use list
 
 * Models to extend
     * BasicModel (`id`, `created_at`, `updated_at`, `updated_by`, `created_by`)
@@ -23,22 +27,20 @@ For example: you want just CRUD router - so use CRUDRouter as express-middleware
         * `getByCriteria`
 * Routers to extends
     * EndpointRouter - contains express.Router instance with '/ping' endpoint for testing
+        * add you own endpoints in `initAditionalEndpoints` method
     * CRUDRouter - contains CRUD routes connected with DAO
         * `POST '/'` create entity
         * `PUT '/:id'` update entity
         * `DELETE '/:id'` delete entity
         * `GET '/'` get all entities
         * `GET '/:id'` get entity
+        - each of these endpoints could be overriden
 
 
 ##### Requirements
 * `npm install --save knex`
 * `npm install --save objection`
 * `npm install --save express`
-
-This library provides implementation of basic classes and common parts for each backend.
-
-Everything in API part is based on Express.js (Router). Everything in DB part is designed for Objection.js models and Knex.js queries (model implementation, query services - DAO or migrations).
 
 ## How to use?
 
