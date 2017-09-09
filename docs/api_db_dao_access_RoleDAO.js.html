@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Home - Documentation</title>
+    <title>api/db/dao/access/RoleDAO.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,152 +29,31 @@
 
 <div id="main">
     
+    <h1 class="page-title">api/db/dao/access/RoleDAO.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const BasicDAO = require('../BasicDAO');
+const RoleModel = require('../../model/access/RoleModel');
 
-
-
-
-
-
-
-
-
-    
-
-
-    <section class="readme">
-        <article><h1>KOEX.JS</h1><h4><a href="http://knexjs.org/">Knex.js</a>, <a href="vincit.github.io/objection.js">Objection.js</a>, <a href="https://expressjs.com/">EXpress</a></h4><p>In the beginnig of every project you have to do boring work like create basic entity with some basic attributes (e.g. <code>created_at</code>, <code>updated_at</code>),
-implement CRUD operations and endpoints for every entity or for example implement hashing user password.</p>
-<p>This helper library provides all of this and much more for every project! Just take a look..</p>
-<p>Everything in API part is based on Express.js (Router). Everything in DB part is designed for Objection.js models and Knex.js queries (model implementation, query services - DAO and migrations).</p>
-<p>The best on all of this is, that you can use any part of this library and than change, override or inject you own implementation.
-For example: you want just CRUD router - so use CRUDRouter as express-middleware and inject your own DAO instance - no problem :) </p>
-<p>All is fully tested: <a href="https://adamryvola.github.io/adane-fw/test">Test reports</a></p>
-<h2>Classes ready-to-use list</h2><ul>
-<li>Models to extend<ul>
-<li>BasicModel (<code>id</code>, <code>created_at</code>, <code>updated_at</code>, <code>updated_by</code>, <code>created_by</code>)</li>
-<li>PublicModel (all from BasicModel + <code>uuid</code> - public identifier)</li>
-</ul>
-</li>
-<li>DAO to extend<ul>
-<li>BasicDAO with methods: <ul>
-<li><code>create(object)</code></li>
-<li><code>update(object)</code></li>
-<li><code>remove(id)</code></li>
-<li><code>getAll()</code></li>
-<li><code>getById(id)</code></li>
-<li><code>getByField(field)</code></li>
-<li><code>getByCriteria</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Routers to extends<ul>
-<li>EndpointRouter - contains express.Router instance with '/ping' endpoint for testing<ul>
-<li>add you own endpoints in <code>initAditionalEndpoints</code> method</li>
-</ul>
-</li>
-<li>CRUDRouter - contains CRUD routes connected with DAO<ul>
-<li><code>POST '/'</code> create entity</li>
-<li><code>PUT '/:id'</code> update entity</li>
-<li><code>DELETE '/:id'</code> delete entity</li>
-<li><code>GET '/'</code> get all entities</li>
-<li><code>GET '/:id'</code> get entity</li>
-<li>each of these endpoints could be overriden</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5>Requirements</h5><ul>
-<li><code>npm install --save knex</code></li>
-<li><code>npm install --save objection</code></li>
-<li><code>npm install --save express</code></li>
-</ul>
-<h2>How to use?</h2><h2>Crete database connection object</h2><pre class="prettyprint source lang-javascript"><code>//example for PostgreSql - use you favourite DB
-module.exports = {
-    test: {
-        connection: 'postgres://postgres:test@localhost:5432/koex-test',
-        client: 'pg',
-        migrations: {
-            directory: __dirname + &quot;/src/api/db/migrations&quot;,
-            tableName: &quot;version&quot;
-        }
-    },
-};</code></pre><h2>Init - initialize knex database connection</h2><pre class="prettyprint source lang-javascript"><code>//insert path to knex cofiguration file
-require('adane-fw').API.DBFactory(__dirname+'/knexfile.js')</code></pre><h3>Custom model, dao and router implementation</h3><pre class="prettyprint source lang-javascript"><code>//Class
-// This custom model has created_at, created_by, updated_at, updated_by, uuid attributes
-class CustomModel extends PublicModel {
-
-    static get tableName() {
-        return 'CUSTOM_MODEL';
-    }
-
-    static get jsonSchema() {
-        return _merge(super.jsonSchema, {
-            properties: {
-                myCustomAttribyte: {type: 'string'}
-            }
-        })
-    }
-}
-module.exports = CustomModel;
-
-//DAO
-// This DAO has standard CRUD operations implemented
-class CustomDAO extends BasicDao {
+/**
+ * RoleDAO - BasicDAO implementation for @link[RoleModel] entity
+ * @augments BasicDAO
+ */
+class RoleDAO extends BasicDAO {
 
 }
-module.exports = new CustomDAO(CustomModel);
+module.exports = new RoleDAO(RoleModel);
 
-//Router
-// This Router has standard CRUD endpoints implemented
-class CustomRouter extends CRUDRouter {
-    initAdditionalEndpoints() {
-        this.getRouter().get('/custom-endpoint', (req, res) => {
-            res.status(200).send('Hello from custom endpoint');
-        })
-    }
-}
-module.exports = new CustomRouter(CustomDAO);
-
-//Add router as middleware for express app
-const CustomRouter = require('./CustomRouter').getRouter();
-const app = new Express();
-app.use('/custom-entity', CustomRouter);
-
-
-//Migration - knex migration
-const up = (kn, Promise) => {
-    return kn.transaction(knex => {
-        return () =>  knex.schema.createTable('CUSTOM_MODEL', table => {
-            initPublicModelTable(table);
-            table.string('customAttribute');
-        });
-    })
-};</code></pre><h3>Use pre-defined models (e.g. User, Permission, Account, ...)</h3><pre class="prettyprint source lang-javascript"><code>//UserModel, DAO and Router are done - we need just use migrations and router
-const UserRouter = require('adane-fw').API.UserRouter.getRouter();
-
-const app = new Express();
-app.use('/user', UserRouter);
-
-// Migrations - you can use own or pre-defined migrations
-// There is standard knex migrations for User, Account, Role and Permission entities
-
-//file: 001_user.js
-module.exports = require('adane-fw').API.migrations.user;
-
-//file: 002_account.js
-module.exports = require('adane-fw').API.migrations.account;
-//...</code></pre><p>That's all :)</p></article>
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

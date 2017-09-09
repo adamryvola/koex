@@ -41,6 +41,13 @@ class EndpointRouter {
         return this.router;
     }
 
+    /**
+     * Send response with (error) status and message
+     * @param res response that will be send
+     * @param status status error code (HTTP code) - should be 4xx or 5xx
+     * @param message error message that will be send in response body
+     * @returns {Request|*}
+     */
     sendErr(res, status, message) {
         return res.status(status).send({success: false, error: message});
     }

@@ -13,7 +13,7 @@ const userObject = {
             accessToken: 'xxx',
             refreshToken: 'yyy',
             email: 'test-account@mail.com',
-            provider: 'LOCALIO',
+            provider: 'koax',
             subject: '123',
         }
     ]
@@ -370,7 +370,13 @@ describe('User', () => {
     });
 
     describe('Update', () => {
-        //TODO
+        describe('Success', () => {
+
+        });
+
+        describe('Fail', () => {
+
+        });
     });
 
     describe('Filter', () => {
