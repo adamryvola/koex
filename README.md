@@ -13,6 +13,8 @@ For example: you want just CRUD router - so use CRUDRouter as express-middleware
 
 All is fully tested: [Test reports](https://adamryvola.github.io/adane-fw/test)
 
+There is UML for better understading relaionships: [UML export](https://drive.google.com/file/d/0BzAI-U4-wrvCdGZRUnNKRHJZVUE/view?usp=sharing)
+
 ## Classes ready-to-use list
 
 * Models to extend
