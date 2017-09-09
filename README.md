@@ -71,6 +71,8 @@ require('adane-fw').API.DBFactory.init(__dirname+'/knexfile.js')
 ```javascript
 //Class
 // This custom model has created_at, created_by, updated_at, updated_by, uuid attributes
+const PublicModel = require('adane-fw').API.DBFactory.Models.PublicModel;
+
 class CustomModel extends PublicModel {
     
     static get tableName() {
@@ -89,13 +91,17 @@ module.exports = CustomModel;
 
 //DAO
 // This DAO has standard CRUD operations implemented
-class CustomDAO extends BasicDao {
+const BasicDAO = require('adane-fw').API.DBFactory.DAO.BasciDAO;
+
+class CustomDAO extends BasicDAO {
     
 }
 module.exports = new CustomDAO(CustomModel);
 
 //Router
 // This Router has standard CRUD endpoints implemented
+const CRUDRouter = require('adane-fw').API.Routers.CRUDRouter;
+
 class CustomRouter extends CRUDRouter {
     initAdditionalEndpoints() {
         this.getRouter().get('/custom-endpoint', (req, res) => {
@@ -112,6 +118,8 @@ app.use('/custom-entity', CustomRouter);
 
 
 //Migration - knex migration
+const initPublicModelTable = require('adane-fw').API.DBFactory.Migrations.initPublicModelTable;
+
 const up = (kn, Promise) => {
     return kn.transaction(knex => {
         return () =>  knex.schema.createTable('CUSTOM_MODEL', table => {
@@ -125,7 +133,7 @@ const up = (kn, Promise) => {
 ### Use pre-defined models (e.g. User, Permission, Account, ...)
 ```javascript
 //UserModel, DAO and Router are done - we need just use migrations and router
-const UserRouter = require('adane-fw').API.UserRouter.getRouter();
+const UserRouter = require('adane-fw').API.Routers.UserRouter.getRouter();
 
 const app = new Express();
 app.use('/user', UserRouter);
@@ -134,10 +142,40 @@ app.use('/user', UserRouter);
 // There is standard knex migrations for User, Account, Role and Permission entities
 
 //file: 001_user.js
-module.exports = require('adane-fw').API.migrations.user;
+module.exports = require('adane-fw').API.DBFactory.Migrations.user;
 
 //file: 002_account.js
-module.exports = require('adane-fw').API.migrations.account;
+module.exports = require('adane-fw').API.DBFactory.Migrations.account;
 //...
 ```
-That's all :)
+
+
+## Complete module object
+* API
+    * DBFactory
+        * Models
+            * BasicModel
+            * PublicModel
+            * UserModel
+            * AccountModel
+            * RoleModel
+            * PermissionModel
+        * DAO
+            * BasicDAO
+            * UserDAO
+            * AccountDAO
+            * RoleDAO
+            * PermissionDAO
+        * Model
+        * Knex
+        * Migrations
+            * initBasicModelTable
+            * initPublicModelTable
+            * scripts
+                * user
+                * account
+                * rolePermission
+    * Routers
+        * EndpointRouter
+        * CRUDRouter
+        * UserRouter
