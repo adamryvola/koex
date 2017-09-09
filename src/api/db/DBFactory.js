@@ -19,7 +19,7 @@ class DBFactory {
         const knexConfig = require(knexfile + '');
         const knex = new Knex(knexConfig[env]);
         Model.knex(knex);
-        this.Model = {
+        this.Models = {
             BasicModel: require('./model/BasicModel'),
             PublicModel: require('./model/PublicModel'),
             UserModel: require('./model/user/UserModel'),
