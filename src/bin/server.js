@@ -12,7 +12,7 @@ app.use([
     knexLogger(knex),
 ]);
 
-app.all('/', (req, res) => res.status(200).send('Welcome in LOCALIO api'));
+app.all('/', (req, res) => res.status(200).send('Welcome in KOEX.JS test server'));
 
 const UserRouter = require('../api/router/user/UserRouter').getRouter();
 app.use('/user', UserRouter);
@@ -22,7 +22,7 @@ app.all('*', (req, res) => {
 });
 
 const server = app.listen(process.env.PORT, function () {
-    console.log('Process ' + process.pid + ' is listening to all incoming requests');
+    console.log('Server is listening to all incoming requests on port ' + process.env.PORT);
 });
 
 module.exports = server;

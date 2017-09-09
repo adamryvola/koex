@@ -11,6 +11,8 @@ Everything in API part is based on Express.js (Router). Everything in DB part is
 The best on all of this is, that you can use any part of this library and than change, override or inject you own implementation.
 For example: you want just CRUD router - so use CRUDRouter as express-middleware and inject your own DAO instance - no problem :) 
 
+All is fully tested: [Test reports](https://adamryvola.github.io/adane-fw/test)
+
 ## Classes ready-to-use list
 
 * Models to extend
