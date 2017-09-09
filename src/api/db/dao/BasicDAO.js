@@ -203,7 +203,7 @@ class BasicDAO {
      * @returns {Objection.QueryBuilder<BasicModel>}
      */
     addWhere(query, {name, operation = '=', value}) {
-        return query.where(name, operation, value);
+        return query.skipUndefined().where(name, operation, value);
     }
 
     /**
