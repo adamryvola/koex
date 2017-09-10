@@ -68,7 +68,7 @@ class BasicModel extends Model {
             this.createdBy = context.user.id;
             this.updatedBy = context.user.id;
         } else {
-            console.warn('[Basic model - beforeInsert] No user in context');
+            console.warn('koex:BasicModel No user in context');
         }
     }
 
@@ -82,7 +82,7 @@ class BasicModel extends Model {
         if (context.user) {
             this.updatedBy = context.user.id;
         } else {
-            console.warn('[Basic model - beforeInsert] No user in context');
+            console.warn('koex:BasicModel  No user in context');
         }
     }
 

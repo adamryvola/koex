@@ -1,7 +1,7 @@
 const objection = require('objection');
 const _ = require('lodash');
 const {Errors, options} = require('../../../constants');
-const debug = require('debug')('[BasicDAO]');
+const debug = require('../../../log')('BasicDAO');
 
 /**
  * BasicDAO implementation with standard CRUD operations and query creator

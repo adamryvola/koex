@@ -1,5 +1,7 @@
+const _ = require('lodash');
 require('../../src').API.DBFactory.init(__dirname + '/../../knexfile.js');
-const knex = require('../../src').API.DBFactory.knex;
+const DBFactory = require('../../src').API.DBFactory;
+const knex = DBFactory.knex;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../src/bin/server');
@@ -22,7 +24,7 @@ const userObject = {
 let user = null;
 let response = null;
 
-describe('User', () => {
+describe('CustomEntity', () => {
 
     before(done => {
         knex.migrate.rollback()
@@ -371,8 +373,70 @@ describe('User', () => {
     });
 
     describe('Update', () => {
-        describe('Success', () => {
 
+        let userToUpdate = {
+            name: 'Changed name',
+            email: 'ChangedEmail@mail.com',
+            accounts: [_.merge(userObject.accounts[0], {
+                accessToken: 'ChangedToken',
+                email: 'changedAccountEmail@mail.com'
+            })]
+        };
+
+
+        before(done => {
+            chai.request(server).post('/user')
+                .send(userObject)
+                .end((err, res) => {
+                    const createdUser = res.body;
+                    userToUpdate.accounts[0].id = createdUser.accounts[0].id;
+                    chai.request(server).put('/user/' + createdUser.id)
+                        .send(userToUpdate)
+                        .end((err, res) => {
+                            response = res;
+                            done();
+                        });
+                })
+        });
+
+        describe('Success', () => {
+            it('status 200', () => {
+                response.status.should.be.eql(200);
+            });
+
+            it('body is object', () => {
+                response.body.should.be.a('object')
+            });
+
+            it('valid model schema', () => {
+                user = response.body;
+
+                user.should.be.property('id');
+                user.id.should.be.a('number');
+
+                user.should.be.property('name');
+                user.name.should.be.a('string');
+
+                user.should.be.property('email');
+                user.email.should.be.a('string');
+
+                user.should.be.property('accounts');
+                user.accounts.should.be.a('array');
+                user.accounts[0].should.be.a('object');
+            });
+
+            it('user properties values', () => {
+                user = response.body;
+
+                user.name.should.be.eql(userToUpdate.name);
+                user.email.should.be.eql(userToUpdate.email);
+
+                user.accounts[0].accessToken.should.be.eql(userToUpdate.accounts[0].accessToken);
+                user.accounts[0].refreshToken.should.be.eql(userToUpdate.accounts[0].refreshToken);
+                user.accounts[0].email.should.be.eql(userToUpdate.accounts[0].email);
+                user.accounts[0].provider.should.be.eql(userToUpdate.accounts[0].provider);
+                user.accounts[0].subject.should.be.eql(userToUpdate.accounts[0].subject);
+            })
         });
 
         describe('Fail', () => {

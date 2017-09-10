@@ -15,7 +15,8 @@
       "command": "mocha --recursive --reporter mochawesome --reporter-options reportDir=./docs/test,reportFilename=index,reportTitle=KOEX.JS,inlineAssets=true",
       "env": {
         "NODE_ENV": "test",
-        "PORT": 3000
+        "PORT": 3000,
+        "DEBUG": "*"
       }
     },
     "dev": {
