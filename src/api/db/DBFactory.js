@@ -13,31 +13,22 @@ const Knex = require('knex');
  */
 class DBFactory {
     constructor() {
-    }
-
-    static get Models() {
-        return {
+        this.Models = {
             BasicModel: require('./model/BasicModel'),
             PublicModel: require('./model/PublicModel'),
             UserModel: require('./model/user/UserModel'),
             AccountModel: require('./model/user/AccountModel'),
             RoleModel: require('./model/access/RoleModel'),
             PermissionModel: require('./model/access/PermissionModel')
-        }
-    }
-
-    static get DAO() {
-        return {
+        };
+        this.DAO = {
             BasciDAO: require('./dao/BasicDAO'),
             UserDAO: require('./dao/user/UserDAO'),
             AccountDAO: require('./dao/user/AccountDAO'),
             RoleDAO: require('./dao/access/RoleDAO'),
             PermissionDAO: require('./dao/access/PermissionDAO'),
-        }
-    }
-
-    static get Migrations() {
-        return require('../../constants/migrations');
+        };
+        this.Migrations = require('../../constants/migrations');
     }
 
     init(knexfile) {
