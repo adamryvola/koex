@@ -2,8 +2,9 @@
  * @module DBFactory
  */
 const Model = require('objection').Model;
-const env = process.env.NODE_ENV || 'production';
 const Knex = require('knex');
+
+const env = process.env.NODE_ENV || 'production';
 
 /**
  * @param knexFile {string} path to knex file
@@ -19,7 +20,7 @@ class DBFactory {
             UserModel: require('./model/user/UserModel'),
             AccountModel: require('./model/user/AccountModel'),
             RoleModel: require('./model/access/RoleModel'),
-            PermissionModel: require('./model/access/PermissionModel')
+            PermissionModel: require('./model/access/PermissionModel'),
         };
         this.DAO = {
             BasciDAO: require('./dao/BasicDAO'),

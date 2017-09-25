@@ -1,11 +1,10 @@
-const {Errors} = require('../../constants');
+const { Errors } = require('../../constants');
 const Router = require('express').Router;
 
 /**
  * Endpoint handler - basic router
  */
 class EndpointRouter {
-
     /**
      * Endpoint handler constructor
      */
@@ -22,16 +21,15 @@ class EndpointRouter {
      * Initialize CRUD endpoints
      */
     initEndpoints() {
-        this.router.use('/ping', (req, res) => {
-            return res.status(200).send('Pong');
-        })
+        this.router.use('/ping', (req, res) => res.status(200).send('Pong'));
     }
 
     /**
      * Initialize additional endpoints
      * @abstract
      */
-    initAdditionalEndpoints() {}
+    initAdditionalEndpoints() {
+    }
 
     /**
      * Returns Router
@@ -49,7 +47,7 @@ class EndpointRouter {
      * @returns {Request|*}
      */
     sendErr(res, status, message) {
-        return res.status(status).send({success: false, error: message});
+        return res.status(status).send({ success: false, error: message });
     }
 }
 

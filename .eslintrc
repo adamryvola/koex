@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "linebreak-style": "off",
+    "indent": ["error", 4],
+    "arrow-parens": "off",
+    "global-require": "off",
+    "class-methods-use-this": "off",
+    "radix": "off",
+    "max-len": ["error", {"ignoreComments": true}]
+  }
+}

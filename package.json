@@ -8,6 +8,7 @@
     "test": "better-npm-run test",
     "prepublish": "npm run docs && npm run test",
     "dev": "better-npm-run dev",
+    "eslint": "./node_modules/.bin/eslint src",
     "refresh": "better-npm-run refresh"
   },
   "betterScripts": {
@@ -56,6 +57,11 @@
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "cookie-parser": "^1.4.3",
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
     "jsdoc": "^3.5.4",
     "knex-logger": "^0.1.0",
     "minami": "^1.2.3",

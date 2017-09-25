@@ -1,7 +1,7 @@
 const BasicModel = require('./BasicModel');
 const _ = require('lodash');
-const crypto = require("crypto");
-const {Errors} = require('../../../constants');
+const crypto = require('crypto');
+const { Errors } = require('../../../constants');
 
 /**
  * PublicModel implementation. It generates random hash identifier on insert as 'uuid' attribute
@@ -26,8 +26,8 @@ class PublicModel extends BasicModel {
     static get jsonSchema() {
         return _.merge(super.jsonSchema, {
             properties: {
-                uuid: {type: 'string'}
-            }
+                uuid: { type: 'string' },
+            },
         });
     }
 
@@ -37,9 +37,8 @@ class PublicModel extends BasicModel {
      */
     $beforeInsert(context) {
         super.$beforeInsert(context);
-        this.uuid = crypto.randomBytes(12).toString("base64");
+        this.uuid = crypto.randomBytes(12).toString('base64');
     }
-
 }
 
 module.exports = PublicModel;

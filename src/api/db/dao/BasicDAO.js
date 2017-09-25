@@ -1,6 +1,5 @@
-const objection = require('objection');
 const _ = require('lodash');
-const {Errors, options} = require('../../../constants');
+const { Errors, options } = require('../../../constants');
 const debug = require('../../../log')('BasicDAO');
 
 /**
@@ -8,7 +7,6 @@ const debug = require('../../../log')('BasicDAO');
  * @abstract
  */
 class BasicDAO {
-
     /**
      * Constructor with model (required)
      * @param model {BasicModel} model class
@@ -60,11 +58,14 @@ class BasicDAO {
      * @returns {BasicModel[]}Promise that returns list of entities
      */
     getByField(field, context) {
-        return this.getModel().makeQuery((trx) => this.createQuery(trx, context).skipUndefined().where(field.name, field.operation, field.value))
-            .catch(err => {
+        return this.getModel()
+            .makeQuery((trx) =>
+                this.createQuery(trx, context)
+                    .skipUndefined().where(field.name, field.operation, field.value)
+            ).catch(err => {
                 debug('GetByField', err.message);
                 throw new Error(Errors.GetByFieldFailed('BasicDAO'));
-            })
+            });
     }
 
     /**
@@ -78,7 +79,7 @@ class BasicDAO {
             .catch(err => {
                 debug('GetAll', err.message);
                 throw new Error(Errors.GetAllFailed('BasicDAO'));
-            })
+            });
     }
 
     /**
@@ -93,18 +94,18 @@ class BasicDAO {
      */
     getByCriteria(filter, context) {
         return this.getModel().makeQuery(trx => {
-            let query = this.createQuery();
+            let query = this.createQuery(trx, context);
             if (_.isEmpty(filter)) return this.getAll(context);
             query = this.addWhere(query, filter[0].column, filter[0].value, filter[0].operation);
             if (filter.length === 1) return this.returnResult(query);
             for (let i = 1; i < filter.length; i++) {
                 query = this.addAndWhere(query, filter[i].value, filter[i].column, filter[i].operation);
             }
-            return this.returnResult(query)
+            return this.returnResult(query);
         }).catch(err => {
             debug('GetByCriteria', err.message);
             throw new Error(Errors.GetByCriteriaFailed('BasicDAO'));
-        })
+        });
     }
 
     /**
@@ -119,17 +120,15 @@ class BasicDAO {
             throw new Error(Errors.InvalidArguments('BasicDAO.create', 'object'));
         }
         return this.getModel().makeQuery(trx => {
-                return this.createQuery(trx, context).insertGraph({})
-                    .then(entity => {
-                        object.id = entity.id;
-                        return this.createQuery(trx, context).upsertGraph(object, options.UpsertOptions)
-                    })
-                    .catch(err => {
-                        debug('Create', err.message);
-                        throw new Error(Errors.CreateEntityFailed('BasicDAO'));
-                    })
-            }
-        );
+            return this.createQuery(trx, context).insertGraph({})
+                .then(entity => {
+                    object.id = entity.id;
+                    return this.createQuery(trx, context).upsertGraph(object, options.UpsertOptions);
+                }).catch(err => {
+                    debug('Create', err.message);
+                    throw new Error(Errors.CreateEntityFailed('BasicDAO'));
+                });
+        });
     }
 
     /**
@@ -148,8 +147,7 @@ class BasicDAO {
                 .catch(err => {
                     debug('Update', err.message);
                     throw new Error(Errors.UpdateEntityFailed('BasicDAO'));
-                })
-        );
+                }));
     }
 
     /**
@@ -163,18 +161,21 @@ class BasicDAO {
         if (!id) {
             throw new Error(Errors.InvalidArguments('BasicDAO.remove', 'id'));
         }
-        return this.getModel().query().deleteById(id)
-            .catch(err => {
-                debug('Remove', err.message);
-                throw new Error(Errors.RemoveEntityFailed(err.message));
-            });
+
+        return this.getModel().makeQuery(trx =>
+            this.createQuery(trx, context).deleteById(id)
+                .catch(err => {
+                    debug('Remove', err.message);
+                    throw new Error(Errors.RemoveEntityFailed(err.message));
+                }));
     }
 
     /**
      * Transactional query creator
      * @param trx {Objection.Transaction} transaction
      * @param context {ReqContext} request context
-     * @returns {Objection.QueryBuilder<BasicModel>} Transactional query builder transactional with request context injected
+     * @returns {Objection.QueryBuilder<BasicModel>}
+     * Transactional query builder transactional with request context injected
      */
     createQuery(trx, context) {
         return this.getModel().query(trx).eager(this.getModel().relations).context(context);
@@ -189,7 +190,7 @@ class BasicDAO {
      * @param {any} field.value Attribute value
      * @returns {Objection.QueryBuilder<BasicModel>}
      */
-    addAndWhere(query, {name, value, operation = '='}) {
+    addAndWhere(query, { name, value, operation = '=' }) {
         return query.andWhere(name, operation, value);
     }
 
@@ -202,7 +203,7 @@ class BasicDAO {
      * @param {any} field.value Attribute value
      * @returns {Objection.QueryBuilder<BasicModel>}
      */
-    addWhere(query, {name, operation = '=', value}) {
+    addWhere(query, { name, operation = '=', value }) {
         return query.skipUndefined().where(name, operation, value);
     }
 
@@ -212,10 +213,7 @@ class BasicDAO {
      * @returns {BasicEntity[]} Promise that return list of entities
      */
     returnResult(query) {
-        return query
-            .then(result => {
-                return result;
-            })
+        return query.then(result => result)
             .catch((err) => {
                 debug('Return result', err.message);
                 throw err;

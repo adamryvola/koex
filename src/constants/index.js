@@ -1,10 +1,10 @@
 const UpsertOptions = {
     relate: true,
-    unrelate: true
+    unrelate: true,
 };
 
 const options = {
-    UpsertOptions
+    UpsertOptions,
 };
 
 module.exports.options = options;
