@@ -98,7 +98,6 @@ class CRUDEndpoint extends EndpointRouter {
                 }
                 return res.status(200).send({ success: true });
             }).catch(err => {
-                console.log(err.message);
                 debug('[delete]', err.message);
                 return this.sendErr(res, 400, err.message);
             }));

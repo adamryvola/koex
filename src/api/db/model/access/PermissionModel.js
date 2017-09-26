@@ -7,7 +7,6 @@ const _ = require('lodash');
  * @augments BasicModel
  */
 class PermissionModel extends BasicModel {
-
     static get tableName() {
         return TABLES.PERMISSION_TABLE_NAME;
     }
@@ -23,15 +22,13 @@ class PermissionModel extends BasicModel {
     static get jsonSchema() {
         return _.merge(super.jsonSchema, {
             properties: {
-                name: {type: 'string'},
-                type: {type: 'string'},
-                activity: {type: 'string'},
-                subject: {type: 'string'}
-            }});
+                name: { type: 'string' },
+                type: { type: 'string' },
+                activity: { type: 'string' },
+                subject: { type: 'string' },
+            },
+        });
     }
 }
 
 module.exports = PermissionModel;
-
-
-

@@ -1,6 +1,5 @@
 const BasicModel = require('../BasicModel');
 const TABLES = require('../../../../constants/tables');
-const UserModel = require('./UserModel');
 const _ = require('lodash');
 
 /**
@@ -8,7 +7,6 @@ const _ = require('lodash');
  * @augments BasicModel
  */
 class AccountModel extends BasicModel {
-
     static get tableName() {
         return TABLES.ACCOUNT_TABLE_NAME;
     }
@@ -26,16 +24,16 @@ class AccountModel extends BasicModel {
     static get jsonSchema() {
         return _.merge(super.jsonSchema, {
             properties: {
-                accessToken: {type: 'string'},
-                refreshToken: {type: 'string'},
-                email: {type: 'string'},
-                provider: {type: 'string'},
-                subject: {type: 'string'},
-                userId: {type: 'integer'}
+                accessToken: { type: 'string' },
+                refreshToken: { type: 'string' },
+                email: { type: 'string' },
+                provider: { type: 'string' },
+                subject: { type: 'string' },
+                userId: { type: 'integer' },
 
-        }});
+            },
+        });
     }
-
 }
 
 module.exports = AccountModel;

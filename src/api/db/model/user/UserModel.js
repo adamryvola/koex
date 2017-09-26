@@ -9,7 +9,6 @@ const _ = require('lodash');
  * @augments PublicModel
  */
 class UserModel extends PublicModel {
-
     static get tableName() {
         return TABLES.USER_TABLE_NAME;
     }
@@ -33,12 +32,12 @@ class UserModel extends PublicModel {
     static get jsonSchema() {
         return _.merge(super.jsonSchema, {
             properties: {
-                name: {type: 'string'},
-                email: {type: 'string'},
-                password: {type: 'string'},
-                salt: {type: 'string'},
-                roleId: {type: 'number'}
-            }
+                name: { type: 'string' },
+                email: { type: 'string' },
+                password: { type: 'string' },
+                salt: { type: 'string' },
+                roleId: { type: 'number' },
+            },
         });
     }
 
@@ -54,20 +53,19 @@ class UserModel extends PublicModel {
                 modelClass: AccountModel,
                 join: {
                     from: `${TABLES.USER_TABLE_NAME}.id`,
-                    to: `${TABLES.ACCOUNT_TABLE_NAME}.userId`
-                }
+                    to: `${TABLES.ACCOUNT_TABLE_NAME}.userId`,
+                },
             },
             role: {
                 relation: this.BelongsToOneRelation,
                 modelClass: RoleModel,
                 join: {
                     from: `${TABLES.USER_TABLE_NAME}.roleId`,
-                    to: `${TABLES.ROLE_TABLE_NAME}.id`
-                }
-            }
-        }
+                    to: `${TABLES.ROLE_TABLE_NAME}.id`,
+                },
+            },
+        };
     }
-
 }
 
 module.exports = UserModel;

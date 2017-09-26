@@ -4,6 +4,7 @@ const cookie = require('cookie-parser');
 const knexLogger = require('knex-logger');
 const path = require('path');
 require('../').API.DBFactory.init(path.join(__dirname, '/../../knexfile.js'));
+const debug = require('../log')('server');
 const knex = require('../').API.DBFactory.knex;
 const app = require('express')();
 
@@ -23,7 +24,7 @@ app.use('/user', UserRouter);
 app.all('*', (req, res) => res.status(404).send({ success: false, message: 'Unknown route' }));
 
 const server = app.listen(process.env.PORT, () => {
-    console.log(`Server is listening to all incoming requests on port ${process.env.PORT}`);
+    debug(`Server is listening to all incoming requests on port ${process.env.PORT}`);
 });
 
 module.exports = server;

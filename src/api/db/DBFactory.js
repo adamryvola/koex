@@ -33,7 +33,8 @@ class DBFactory {
     }
 
     init(knexfile) {
-        const knexConfig = require(knexfile + '');
+        /* eslint-disable import/no-dynamic-require */
+        const knexConfig = require(`${knexfile}`);
         const knex = new Knex(knexConfig[env]);
         Model.knex(knex);
         this.Model = Model;

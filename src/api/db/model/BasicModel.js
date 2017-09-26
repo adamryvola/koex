@@ -1,13 +1,13 @@
-const {Model} = require('objection');
+const { Model } = require('objection');
 const objection = require('objection');
-const {Errors} = require('../../../constants');
+const { Errors } = require('../../../constants');
+const debug = require('../../../log')('BasicModel');
 
 /**
  * BasicModel implementation with default properties and transactional query creator
  * @abstract
  */
 class BasicModel extends Model {
-
     constructor() {
         if (new.target === BasicModel) {
             throw new Error(Errors.AbstractClassConstructor('BasicModel'));
@@ -48,12 +48,12 @@ class BasicModel extends Model {
         return {
             type: 'object',
             properties: {
-                id: {type: 'integer'},
-                createdAt: {anyOf: [{type: 'null'}, {type: 'string', format: 'date-time'}]},
-                updatedAt: {anyOf: [{type: 'null'}, {type: 'string', format: 'date-time'}]},
-                createdBy: {anyOf: [{type: 'null'}, {type: 'integer'}]},
-                updatedBy: {anyOf: [{type: 'null'}, {type: 'integer'}]}
-            }
+                id: { type: 'integer' },
+                createdAt: { anyOf: [{ type: 'null' }, { type: 'string', format: 'date-time' }] },
+                updatedAt: { anyOf: [{ type: 'null' }, { type: 'string', format: 'date-time' }] },
+                createdBy: { anyOf: [{ type: 'null' }, { type: 'integer' }] },
+                updatedBy: { anyOf: [{ type: 'null' }, { type: 'integer' }] },
+            },
         };
     }
 
@@ -68,7 +68,7 @@ class BasicModel extends Model {
             this.createdBy = context.user.id;
             this.updatedBy = context.user.id;
         } else {
-            console.warn('koex:BasicModel No user in context');
+            debug('koex:BasicModel No user in context');
         }
     }
 
@@ -82,7 +82,7 @@ class BasicModel extends Model {
         if (context.user) {
             this.updatedBy = context.user.id;
         } else {
-            console.warn('koex:BasicModel  No user in context');
+            debug('koex:BasicModel  No user in context');
         }
     }
 

@@ -9,7 +9,6 @@ const { Errors } = require('../../../constants');
  * @augments BasicModel
  */
 class PublicModel extends BasicModel {
-
     constructor() {
         if (new.target === PublicModel) {
             throw new Error(Errors.AbstractClassConstructor('PublicModel'));

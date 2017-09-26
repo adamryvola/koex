@@ -1,5 +1,4 @@
 const BasicModel = require('../BasicModel');
-const UserModel = require('../user/UserModel');
 const PermissionModel = require('./PermissionModel');
 const TABLES = require('../../../../constants/tables');
 const _ = require('lodash');
@@ -9,7 +8,6 @@ const _ = require('lodash');
  * @augments BasicModel
  */
 class RoleModel extends BasicModel {
-
     static get tableName() {
         return TABLES.ROLE_TABLE_NAME;
     }
@@ -22,8 +20,9 @@ class RoleModel extends BasicModel {
     static get jsonSchema() {
         return _.merge(super.jsonSchema, {
             properties: {
-                name: {type: 'string'}
-            }});
+                name: { type: 'string' },
+            },
+        });
     }
 
     /**
@@ -40,16 +39,13 @@ class RoleModel extends BasicModel {
                     from: `${TABLES.ROLE_TABLE_NAME}.id`,
                     through: {
                         from: `${TABLES.ROLE_TO_PERMISSION_TABLE_NAME}.roleId`,
-                        to: `${TABLES.ROLE_TO_PERMISSION_TABLE_NAME}.permissionId`
+                        to: `${TABLES.ROLE_TO_PERMISSION_TABLE_NAME}.permissionId`,
                     },
-                    to: `${TABLES.PERMISSION_TABLE_NAME}.id`
-                }
-            }
-        }
+                    to: `${TABLES.PERMISSION_TABLE_NAME}.id`,
+                },
+            },
+        };
     }
-
 }
 
 module.exports = RoleModel;
-
-

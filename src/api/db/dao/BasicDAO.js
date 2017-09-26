@@ -61,8 +61,8 @@ class BasicDAO {
         return this.getModel()
             .makeQuery((trx) =>
                 this.createQuery(trx, context)
-                    .skipUndefined().where(field.name, field.operation, field.value)
-            ).catch(err => {
+                    .skipUndefined().where(field.name, field.operation, field.value))
+            .catch(err => {
                 debug('GetByField', err.message);
                 throw new Error(Errors.GetByFieldFailed('BasicDAO'));
             });
@@ -98,7 +98,7 @@ class BasicDAO {
             if (_.isEmpty(filter)) return this.getAll(context);
             query = this.addWhere(query, filter[0].column, filter[0].value, filter[0].operation);
             if (filter.length === 1) return this.returnResult(query);
-            for (let i = 1; i < filter.length; i++) {
+            for (let i = 1; i < filter.length; i += 1) {
                 query = this.addAndWhere(query, filter[i].value, filter[i].column, filter[i].operation);
             }
             return this.returnResult(query);
@@ -110,25 +110,25 @@ class BasicDAO {
 
     /**
      * Create entity (graph style, with all relations)
-     * @param object {BasicModel} data object
+     * @param data {BasicModel} data object
      * @param context {ReqContext} request context
      * @throws {CreateEntityFailed | InvalidArguments}
      * @returns {BasicModel} Promise that returns created entity
      */
-    create(object, context) {
+    create(data, context) {
+        const object = data;
         if (!object) {
             throw new Error(Errors.InvalidArguments('BasicDAO.create', 'object'));
         }
-        return this.getModel().makeQuery(trx => {
-            return this.createQuery(trx, context).insertGraph({})
+        return this.getModel().makeQuery(trx =>
+            this.createQuery(trx, context).insertGraph({})
                 .then(entity => {
                     object.id = entity.id;
                     return this.createQuery(trx, context).upsertGraph(object, options.UpsertOptions);
                 }).catch(err => {
                     debug('Create', err.message);
                     throw new Error(Errors.CreateEntityFailed('BasicDAO'));
-                });
-        });
+                }));
     }
 
     /**
