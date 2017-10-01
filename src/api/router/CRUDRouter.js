@@ -1,6 +1,6 @@
 const EndpointRouter = require('./EndpointRouter');
 const { Errors } = require('../../constants');
-const debug = require('../../log')('CRUDRoute');
+const debug = require('../../log')('CRUDRouter');
 
 /**
  * CRUD Endpoint
@@ -70,7 +70,6 @@ class CRUDEndpoint extends EndpointRouter {
      */
     initUpdateEndpoint() {
         this.router.put('/:id', (req, res) => {
-            debug(typeof req.params.id);
             if (!req.body.id) {
                 try {
                     req.body.id = parseInt(req.params.id);

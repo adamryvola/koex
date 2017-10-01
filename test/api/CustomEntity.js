@@ -1,10 +1,12 @@
-const _ = require('lodash');
 require('../../src').API.DBFactory.init(__dirname + '/../../knexfile.js');
+const _ = require('lodash');
 const DBFactory = require('../../src').API.DBFactory;
 const knex = DBFactory.knex;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../src/bin/server');
+const should = chai.should();
+
 chai.use(chaiHttp);
 
 const userObject = {
@@ -18,29 +20,28 @@ const userObject = {
             email: 'test-account@mail.com',
             provider: 'koax',
             subject: '123',
-        }
-    ]
+        },
+    ],
 };
 let user = null;
 let response = null;
 
 describe('CustomEntity', () => {
-
     before(done => {
         knex.migrate.rollback()
             .then(() => knex.migrate.latest())
-            .then(() => done())
+            .then(() => done());
     });
 
     beforeEach(done => {
         knex.migrate.rollback()
             .then(() => knex.migrate.latest())
-            .then(() => done())
+            .then(() => done());
     });
 
     after(done => {
         knex.migrate.rollback()
-            .then(() => done())
+            .then(() => done());
     });
 
     describe('Create', () => {
@@ -59,7 +60,7 @@ describe('CustomEntity', () => {
             });
 
             it('body is object', () => {
-                response.body.should.be.a('object')
+                response.body.should.be.a('object');
             });
 
             it('valid model schema', () => {
@@ -90,7 +91,7 @@ describe('CustomEntity', () => {
                 user.accounts[0].email.should.be.eql(userObject.accounts[0].email);
                 user.accounts[0].provider.should.be.eql(userObject.accounts[0].provider);
                 user.accounts[0].subject.should.be.eql(userObject.accounts[0].subject);
-            })
+            });
         });
 
         describe('Fail', () => {
@@ -98,7 +99,7 @@ describe('CustomEntity', () => {
             const userObject = {
                 name: 'Test Testeros',
                 email: 'test@mail.com',
-                blbost: 'blbost123'
+                blbost: 'blbost123',
             };
 
             let response = null;
@@ -109,7 +110,7 @@ describe('CustomEntity', () => {
                     .end((err, res) => {
                         response = res;
                         done();
-                    })
+                    });
             });
 
             it('status 400', () => {
@@ -117,7 +118,7 @@ describe('CustomEntity', () => {
             });
 
             it('body is object', () => {
-                response.body.should.be.a('object')
+                response.body.should.be.a('object');
             });
 
             it('valid response', () => {
@@ -133,7 +134,6 @@ describe('CustomEntity', () => {
 
     describe('Get by id', () => {
         describe('Success', () => {
-
             let createdUserId = null;
 
             before(done => {
@@ -146,7 +146,7 @@ describe('CustomEntity', () => {
                                 response = res;
                                 done();
                             });
-                    })
+                    });
             });
 
             it('status 200', () => {
@@ -154,7 +154,7 @@ describe('CustomEntity', () => {
             });
 
             it('body is object', () => {
-                response.body.should.be.a('object')
+                response.body.should.be.a('object');
             });
 
             it('valid model schema', () => {
@@ -185,7 +185,7 @@ describe('CustomEntity', () => {
                 user.accounts[0].email.should.be.eql(userObject.accounts[0].email);
                 user.accounts[0].provider.should.be.eql(userObject.accounts[0].provider);
                 user.accounts[0].subject.should.be.eql(userObject.accounts[0].subject);
-            })
+            });
         });
 
         describe('Fail', () => {
@@ -202,7 +202,7 @@ describe('CustomEntity', () => {
             });
 
             it('body is object', () => {
-                response.body.should.be.a('object')
+                response.body.should.be.a('object');
             });
 
             it('valid response', () => {
@@ -218,7 +218,6 @@ describe('CustomEntity', () => {
     });
 
     describe('GetAll', () => {
-
         before(done => {
             chai.request(server).post('/user')
                 .send(userObject)
@@ -231,8 +230,8 @@ describe('CustomEntity', () => {
                                     response = res;
                                     done();
                                 });
-                        })
-                })
+                        });
+                });
         });
 
         it('status 200', () => {
@@ -245,7 +244,7 @@ describe('CustomEntity', () => {
         });
 
         it('valid model schema', () => {
-            users = response.body;
+            const users = response.body;
 
             users[0].should.be.property('id');
             users[0].id.should.be.a('number');
@@ -275,7 +274,7 @@ describe('CustomEntity', () => {
         });
 
         it('users properties values', () => {
-            users = response.body;
+            const users = response.body;
 
             users[0].name.should.be.eql(userObject.name);
             users[0].email.should.be.eql(userObject.email);
@@ -292,13 +291,11 @@ describe('CustomEntity', () => {
             users[1].accounts[0].email.should.be.eql(userObject.accounts[0].email);
             users[1].accounts[0].provider.should.be.eql(userObject.accounts[0].provider);
             users[1].accounts[0].subject.should.be.eql(userObject.accounts[0].subject);
-        })
+        });
     });
 
     describe('Delete', () => {
-
         describe('Success', () => {
-
             let allUsers = null;
 
             before(done => {
@@ -317,8 +314,8 @@ describe('CustomEntity', () => {
                                                 done();
                                             });
                                     });
-                            })
-                    })
+                            });
+                    });
             });
 
             it('status 200', () => {
@@ -326,7 +323,7 @@ describe('CustomEntity', () => {
             });
 
             it('body is object', () => {
-                response.body.should.be.a('object')
+                response.body.should.be.a('object');
             });
 
             it('valid response', () => {
@@ -338,8 +335,7 @@ describe('CustomEntity', () => {
             it('one is deleted', () => {
                 allUsers.length.should.be.eql(1);
                 allUsers[0].id.should.be.eql(2);
-            })
-
+            });
         });
 
         describe('Fail', () => {
@@ -373,14 +369,13 @@ describe('CustomEntity', () => {
     });
 
     describe('Update', () => {
-
-        let userToUpdate = {
+        const userToUpdate = {
             name: 'Changed name',
             email: 'ChangedEmail@mail.com',
             accounts: [_.merge(userObject.accounts[0], {
                 accessToken: 'ChangedToken',
                 email: 'changedAccountEmail@mail.com'
-            })]
+            })],
         };
 
 
@@ -390,13 +385,13 @@ describe('CustomEntity', () => {
                 .end((err, res) => {
                     const createdUser = res.body;
                     userToUpdate.accounts[0].id = createdUser.accounts[0].id;
-                    chai.request(server).put('/user/' + createdUser.id)
+                    chai.request(server).put(`/user/${createdUser.id}`)
                         .send(userToUpdate)
                         .end((err, res) => {
                             response = res;
                             done();
                         });
-                })
+                });
         });
 
         describe('Success', () => {
@@ -405,7 +400,7 @@ describe('CustomEntity', () => {
             });
 
             it('body is object', () => {
-                response.body.should.be.a('object')
+                response.body.should.be.a('object');
             });
 
             it('valid model schema', () => {
@@ -436,7 +431,7 @@ describe('CustomEntity', () => {
                 user.accounts[0].email.should.be.eql(userToUpdate.accounts[0].email);
                 user.accounts[0].provider.should.be.eql(userToUpdate.accounts[0].provider);
                 user.accounts[0].subject.should.be.eql(userToUpdate.accounts[0].subject);
-            })
+            });
         });
 
         describe('Fail', () => {
@@ -444,7 +439,50 @@ describe('CustomEntity', () => {
         });
     });
 
-    describe('Filter', () => {
+    describe('Available', () => {
+        before(done => {
+            chai.request(server).post('/user')
+                .send(userObject)
+                .end((err, res) => {
+                    chai.request(server).get(`/user/available?email=${userObject.email}`)
+                        .send()
+                        .end((err, res) => {
+                            response = res;
+                            done();
+                        });
+                });
+        });
 
+        describe('Fail', () => {
+            it('status 200', () => {
+                response.status.should.be.eql(200);
+            });
+
+            it('body is object', () => {
+                response.body.should.be.a('object');
+            });
+
+            it('correct response value', () => {
+                response.body.result.should.be.eql(false);
+            });
+        });
+    });
+
+    describe('Filter', () => {
+        before(done => {
+            chai.request(server).post('/user')
+                .send(userObject)
+                .end((err, res) => {
+                    chai.request(server).post('/user')
+                        .send(userObject)
+                        .end((err, res) => {
+                            chai.request(server).get('/user')
+                                .end((err, res) => {
+                                    response = res;
+                                    done();
+                                });
+                        });
+                });
+        });
     });
 });

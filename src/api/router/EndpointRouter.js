@@ -13,8 +13,8 @@ class EndpointRouter {
             throw new Error(Errors.GetByFieldFailed('EndpointRouter'));
         }
         this.router = new Router();
-        this.initEndpoints();
         this.initAdditionalEndpoints();
+        this.initEndpoints();
     }
 
     /**

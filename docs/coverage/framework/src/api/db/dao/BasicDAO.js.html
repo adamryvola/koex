@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for framework/src/api/db/dao/BasicDAO.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\..\..\index.html">All files</a> / <a href="index.html">framework/src/api/db/dao</a> BasicDAO.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">46.88% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>30/64</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">37.5% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>6/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">51.61% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>16/31</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">47.46% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>28/59</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const _ = require('lodash');
+const { Errors, options } = require('../../../constants');
+const debug = require('../../../log')('BasicDAO');
+&nbsp;
+/**
+ * BasicDAO implementation with standard CRUD operations and query creator
+ * @abstract
+ */
+class BasicDAO {
+    /**
+     * Constructor with model (required)
+     * @param model {BasicModel} model class
+     * @throws {AbstractClassConstructor} Cannot crate Basic class directly - subclass needed
+     * @returns {BasicDAO}
+     */
+    constructor(model) {
+        if (new.target === BasicDAO) {
+            throw Error(Errors.AbstractClassConstructor('BasicDAO'));
+        }
+        this.setModel(model);
+        return this;
+    }
+&nbsp;
+    getModel() {
+        return this.model;
+    }
+&nbsp;
+    setModel(model) {
+        this.model = model;
+    }
+&nbsp;
+    /**
+     * Get entity by ID
+     * @param id {number} entity id
+     * @param context {ReqContext} request context
+     * @throws {GetByIdFailed}
+     * @returns {BasicModel} Promise that returns entity
+     */
+    getById(id, context) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!id) {
+<span class="cstat-no" title="statement not covered" >            throw new Error(Errors.InvalidArguments('BasicDAO.getById', 'id'));</span>
+        }
+        return this.getModel().makeQuery((trx) =&gt; this.createQuery(trx, context).findById(id)
+            .catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
+<span class="cstat-no" title="statement not covered" >                debug('GgetById error', err.message);</span>
+<span class="cstat-no" title="statement not covered" >                throw new Error(Errors.GetByIdFailed('BasicDAO.getById'));</span>
+            }));
+    }
+&nbsp;
+    /**
+     * Get entities by field value
+     * @param field {Object} Field object
+     * @param {string} field.name Database column name
+     * @param {string} field.operation Operation for comparing values
+     * @param {any} field.value Attribute value
+     * @param context {ReqContext} request context
+     * @throws {GetByFieldFailed}
+     * @returns {BasicModel[]}Promise that returns list of entities
+     */
+<span class="fstat-no" title="function not covered" >    ge</span>tByField(field, context) {
+<span class="cstat-no" title="statement not covered" >        return this.getModel()</span>
+            .makeQuery(<span class="fstat-no" title="function not covered" >(t</span>rx) =&gt;
+<span class="cstat-no" title="statement not covered" >                this.createQuery(trx, context)</span>
+                    .skipUndefined().where(field.name, field.operation, field.value))
+            .catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
+<span class="cstat-no" title="statement not covered" >                debug('GetByField', err.message);</span>
+<span class="cstat-no" title="statement not covered" >                throw new Error(Errors.GetByFieldFailed('BasicDAO'));</span>
+            });
+    }
+&nbsp;
+    /**
+     * Get all entities
+     * @param context {ReqContext} request context
+     * @throws {GetAllFailed}
+     * @returns {BasicModel[]} Promise that returns list of entites
+     */
+    getAll(context) {
+        return this.getModel().makeQuery((trx) =&gt; this.createQuery(trx, context))
+            .catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
+<span class="cstat-no" title="statement not covered" >                debug('GetAll', err.message);</span>
+<span class="cstat-no" title="statement not covered" >                throw new Error(Errors.GetAllFailed('BasicDAO'));</span>
+            });
+    }
+&nbsp;
+    /**
+     * Get entities by criteria array
+     * @param filter {Object[]} Filter array
+     * @param {string} filter[].name Database column name
+     * @param {string} filter[].operation Operation for comparing values
+     * @param {any} filter[].value Attribute value
+     * @param context {ReqContext} request context
+     * @throws {GetByCriteriaFailed}
+     * @returns {BasicModel[]}Promise that returns list of entities
+     */
+<span class="fstat-no" title="function not covered" >    ge</span>tByCriteria(filter, context) {
+<span class="cstat-no" title="statement not covered" >        return this.getModel().makeQuery(<span class="fstat-no" title="function not covered" >tr</span>x =&gt; {</span>
+            let query = <span class="cstat-no" title="statement not covered" >this.createQuery(trx, context);</span>
+<span class="cstat-no" title="statement not covered" >            if (_.isEmpty(filter)) <span class="cstat-no" title="statement not covered" >return this.getAll(context);</span></span>
+<span class="cstat-no" title="statement not covered" >            query = this.addWhere(query, filter[0].column, filter[0].value, filter[0].operation);</span>
+<span class="cstat-no" title="statement not covered" >            if (filter.length === 1) <span class="cstat-no" title="statement not covered" >return this.returnResult(query);</span></span>
+<span class="cstat-no" title="statement not covered" >            for (let i = 1; i &lt; filter.length; i += 1) {</span>
+<span class="cstat-no" title="statement not covered" >                query = this.addAndWhere(query, filter[i].value, filter[i].column, filter[i].operation);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            return this.returnResult(query);</span>
+        }).catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
+<span class="cstat-no" title="statement not covered" >            debug('GetByCriteria', err.message);</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error(Errors.GetByCriteriaFailed('BasicDAO'));</span>
+        });
+    }
+&nbsp;
+    /**
+     * Create entity (graph style, with all relations)
+     * @param data {BasicModel} data object
+     * @param context {ReqContext} request context
+     * @throws {CreateEntityFailed | InvalidArguments}
+     * @returns {BasicModel} Promise that returns created entity
+     */
+    create(data, context) {
+        const object = data;
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!object) {
+<span class="cstat-no" title="statement not covered" >            throw new Error(Errors.InvalidArguments('BasicDAO.create', 'object'));</span>
+        }
+        return this.getModel().makeQuery(trx =&gt;
+            this.createQuery(trx, context).insertGraph({})
+                .then(entity =&gt; {
+                    object.id = entity.id;
+                    return this.createQuery(trx, context).upsertGraph(object, options.UpsertOptions);
+                }).catch(err =&gt; {
+                    debug('Create', err.message);
+                    throw new Error(Errors.CreateEntityFailed('BasicDAO'));
+                }));
+    }
+&nbsp;
+    /**
+     * Update entity (graph style, with all relations)
+     * @param object {BasicModel} data object
+     * @param context {ReqContext} request context
+     * @throws {UpdateEntityFailed | InvalidArguments}
+     * @returns {BasicModel} Promise that returns updated entity
+     */
+    update(object, context) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!object) {
+<span class="cstat-no" title="statement not covered" >            throw new Error(Errors.InvalidArguments('BasicDAO.update', 'object'));</span>
+        }
+        return this.getModel().makeQuery(trx =&gt;
+            this.createQuery(trx, context).upsertGraph(object, options.UpsertOptions)
+                .catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
+<span class="cstat-no" title="statement not covered" >                    debug('Update', err.message);</span>
+<span class="cstat-no" title="statement not covered" >                    throw new Error(Errors.UpdateEntityFailed('BasicDAO'));</span>
+                }));
+    }
+&nbsp;
+    /**
+     * Remove entity by id
+     * @param id {number} id of entity to be removed
+     * @param context {ReqContext} request context
+     * @throws {RemoveEntityFailed | InvalidArguments}
+     * @returns {Object} result
+     */
+    remove(id, context) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!id) {
+<span class="cstat-no" title="statement not covered" >            throw new Error(Errors.InvalidArguments('BasicDAO.remove', 'id'));</span>
+        }
+&nbsp;
+        return this.getModel().makeQuery(trx =&gt;
+            this.createQuery(trx, context).deleteById(id)
+                .catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
+<span class="cstat-no" title="statement not covered" >                    debug('Remove', err.message);</span>
+<span class="cstat-no" title="statement not covered" >                    throw new Error(Errors.RemoveEntityFailed(err.message));</span>
+                }));
+    }
+&nbsp;
+    /**
+     * Transactional query creator
+     * @param trx {Objection.Transaction} transaction
+     * @param context {ReqContext} request context
+     * @returns {Objection.QueryBuilder&lt;BasicModel&gt;}
+     * Transactional query builder transactional with request context injected
+     */
+    createQuery(trx, context) {
+        return this.getModel().query(trx).eager(this.getModel().relations).context(context);
+    }
+&nbsp;
+    /**
+     * Add where condition to query
+     * @param query {Objection.QueryBuilder&lt;BasicModel&gt;} Query builder
+     * @param field {Object} field
+     * @param {string} field.name Database column name
+     * @param {string} field.operation Operation for comparing values
+     * @param {any} field.value Attribute value
+     * @returns {Objection.QueryBuilder&lt;BasicModel&gt;}
+     */
+<span class="fstat-no" title="function not covered" >    ad</span>dAndWhere(query, { name, value, operation = <span class="branch-0 cbranch-no" title="branch not covered" >'=' </span>}) {
+<span class="cstat-no" title="statement not covered" >        return query.andWhere(name, operation, value);</span>
+    }
+&nbsp;
+    /**
+     * Add first where condition to query
+     * @param query {Objection.QueryBuilder&lt;BasicModel&gt;} Query builder
+     * @param field {Object} field
+     * @param {string} field.name Database column name
+     * @param {string} field.operation Operation for comparing values
+     * @param {any} field.value Attribute value
+     * @returns {Objection.QueryBuilder&lt;BasicModel&gt;}
+     */
+<span class="fstat-no" title="function not covered" >    ad</span>dWhere(query, { name, operation = <span class="branch-0 cbranch-no" title="branch not covered" >'=',</span> value }) {
+<span class="cstat-no" title="statement not covered" >        return query.skipUndefined().where(name, operation, value);</span>
+    }
+&nbsp;
+    /**
+     * Resolve query builder or log error and pass them to next catcher
+     * @param query {Objection.QueryBuilder&lt;BasicModel&gt;} Query builder, that will be resolved
+     * @returns {BasicEntity[]} Promise that return list of entities
+     */
+<span class="fstat-no" title="function not covered" >    re</span>turnResult(query) {
+<span class="cstat-no" title="statement not covered" >        return query.then(<span class="fstat-no" title="function not covered" >re</span>sult =&gt; <span class="cstat-no" title="statement not covered" >result)</span></span>
+            .catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {
+<span class="cstat-no" title="statement not covered" >                debug('Return result', err.message);</span>
+<span class="cstat-no" title="statement not covered" >                throw err;</span>
+            });
+    }
+}
+&nbsp;
+module.exports = BasicDAO;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Oct 01 2017 14:09:51 GMT+0200 (Střední Evropa (letní čas))
+</div>
+</div>
+<script src="..\..\..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\..\..\sorter.js"></script>
+</body>
+</html>
