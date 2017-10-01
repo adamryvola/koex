@@ -50,7 +50,8 @@
     "knex": "^0.13.0",
     "lodash": "^4.17.4",
     "objection": "^0.8.8",
-    "pg": "^7.3.0"
+    "pg": "^7.3.0",
+    "qs": "^6.5.1"
   },
   "devDependencies": {
     "body-parser": "^1.17.2",

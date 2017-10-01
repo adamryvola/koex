@@ -18,8 +18,22 @@ const userObject = {
             accessToken: 'xxx',
             refreshToken: 'yyy',
             email: 'test-account@mail.com',
-            provider: 'koax',
+            provider: 'koex',
             subject: '123',
+        },
+    ],
+};
+const userObject2 = {
+    name: 'Test Testeros2',
+    email: 'test2@mail.com',
+    rawPassword: 'test1234',
+    accounts: [
+        {
+            accessToken: 'xxx2',
+            refreshToken: 'yyy2',
+            email: 'test-account2@mail.com',
+            provider: 'koex2',
+            subject: '1234',
         },
     ],
 };
@@ -52,7 +66,7 @@ describe('CustomEntity', () => {
                     .end((err, res) => {
                         response = res;
                         done();
-                    })
+                    });
             });
 
             it('status 200', () => {
@@ -95,7 +109,6 @@ describe('CustomEntity', () => {
         });
 
         describe('Fail', () => {
-
             const userObject = {
                 name: 'Test Testeros',
                 email: 'test@mail.com',
@@ -188,7 +201,7 @@ describe('CustomEntity', () => {
             });
         });
 
-        describe('Fail', () => {
+        describe('Fail - no user', () => {
             before(done => {
                 chai.request(server).get('/user/1')
                     .end((err, res) => {
@@ -213,8 +226,34 @@ describe('CustomEntity', () => {
                 response.body.should.be.property('error');
                 response.body.error.should.be.a('string');
             });
+        });
 
-        })
+        describe('Fail - id as string', () => {
+            before(done => {
+                chai.request(server).get('/user/xx')
+                    .end((err, res) => {
+                        response = res;
+                        done();
+                    });
+            });
+
+            it('status 400', () => {
+                response.status.should.be.eql(400);
+            });
+
+            it('body is object', () => {
+                response.body.should.be.a('object');
+            });
+
+            it('valid response', () => {
+                response.body.should.be.property('success');
+                response.body.success.should.be.a('boolean');
+                response.body.success.should.be.eql(false);
+
+                response.body.should.be.property('error');
+                response.body.error.should.be.a('string');
+            });
+        });
     });
 
     describe('GetAll', () => {
@@ -338,14 +377,14 @@ describe('CustomEntity', () => {
             });
         });
 
-        describe('Fail', () => {
+        describe('Fail - no user in db', () => {
 
             before(done => {
                 chai.request(server).delete('/user/1')
                     .end((err, res) => {
                         response = res;
-                        done()
-                    })
+                        done();
+                    });
             });
 
             it('status 404', () => {
@@ -354,6 +393,34 @@ describe('CustomEntity', () => {
 
             it('body is object', () => {
                 response.body.should.be.a('object')
+            });
+
+            it('valid response', () => {
+                response.body.should.be.property('success');
+                response.body.success.should.be.a('boolean');
+                response.body.success.should.be.eql(false);
+
+                response.body.should.be.property('error');
+                response.body.error.should.be.a('string');
+            });
+
+        });
+
+        describe('Fail - id as string', () => {
+            before(done => {
+                chai.request(server).delete('/user/xx')
+                    .end((err, res) => {
+                        response = res;
+                        done();
+                    });
+            });
+
+            it('status 400', () => {
+                response.status.should.be.eql(400);
+            });
+
+            it('body is object', () => {
+                response.body.should.be.a('object');
             });
 
             it('valid response', () => {
@@ -439,21 +506,21 @@ describe('CustomEntity', () => {
         });
     });
 
-    describe('Available', () => {
-        before(done => {
-            chai.request(server).post('/user')
-                .send(userObject)
-                .end((err, res) => {
-                    chai.request(server).get(`/user/available?email=${userObject.email}`)
-                        .send()
-                        .end((err, res) => {
-                            response = res;
-                            done();
-                        });
-                });
-        });
+    describe('User - email available', () => {
+        describe('Success - email is not available', () => {
+            before(done => {
+                chai.request(server).post('/user')
+                    .send(userObject)
+                    .end((err, res) => {
+                        chai.request(server).get(`/user/available?email=${userObject.email}`)
+                            .send()
+                            .end((err, res) => {
+                                response = res;
+                                done();
+                            });
+                    });
+            });
 
-        describe('Fail', () => {
             it('status 200', () => {
                 response.status.should.be.eql(200);
             });
@@ -466,23 +533,133 @@ describe('CustomEntity', () => {
                 response.body.result.should.be.eql(false);
             });
         });
-    });
 
-    describe('Filter', () => {
-        before(done => {
-            chai.request(server).post('/user')
-                .send(userObject)
-                .end((err, res) => {
-                    chai.request(server).post('/user')
-                        .send(userObject)
-                        .end((err, res) => {
-                            chai.request(server).get('/user')
-                                .end((err, res) => {
-                                    response = res;
-                                    done();
-                                });
-                        });
-                });
+        describe('Success - email is available', () => {
+            before(done => {
+                chai.request(server).post('/user')
+                    .send(userObject)
+                    .end((err, res) => {
+                        chai.request(server).get('/user/available?email=fake@mail.com')
+                            .send()
+                            .end((err, res) => {
+                                response = res;
+                                done();
+                            });
+                    });
+            });
+
+            it('status 200', () => {
+                response.status.should.be.eql(200);
+            });
+
+            it('body is object', () => {
+                response.body.should.be.a('object');
+            });
+
+            it('correct response value', () => {
+                response.body.result.should.be.eql(true);
+            });
+        });
+
+        describe('Fail - req without email in query', () => {
+            before(done => {
+                chai.request(server).post('/user')
+                    .send(userObject)
+                    .end((err, res) => {
+                        chai.request(server).get('/user/available')
+                            .send()
+                            .end((err, res) => {
+                                response = res;
+                                done();
+                            });
+                    });
+            });
+
+            it('status 400', () => {
+                response.status.should.be.eql(400);
+            });
+
+            it('body is object', () => {
+                response.body.should.be.a('object');
+            });
+
+            it('valid response', () => {
+                response.body.should.be.property('success');
+                response.body.success.should.be.a('boolean');
+                response.body.success.should.be.eql(false);
+
+                response.body.should.be.property('error');
+                response.body.error.should.be.a('string');
+            });
+        });
+
+        describe('Fail - req with empty email in query', () => {
+            before(done => {
+                chai.request(server).post('/user')
+                    .send(userObject)
+                    .end((err, res) => {
+                        chai.request(server).get('/user/available?email=')
+                            .send()
+                            .end((err, res) => {
+                                response = res;
+                                done();
+                            });
+                    });
+            });
+
+            it('status 400', () => {
+                response.status.should.be.eql(400);
+            });
+
+            it('body is object', () => {
+                response.body.should.be.a('object');
+            });
+
+            it('valid response', () => {
+                response.body.should.be.property('success');
+                response.body.success.should.be.a('boolean');
+                response.body.success.should.be.eql(false);
+
+                response.body.should.be.property('error');
+                response.body.error.should.be.a('string');
+            });
         });
     });
+
+    /*
+    describe('Filter', () => {
+        describe('Success', () => {
+            before(done => {
+                chai.request(server).post('/user')
+                    .send(userObject)
+                    .end((err, res) => {
+                        chai.request(server).post('/user')
+                            .send(userObject2)
+                            .end((err, res) => {
+                                const filter = [
+                                    {
+                                        column: 'email',
+                                        value: userObject2.email,
+                                    },
+                                ];
+                                chai.request(server).get('/user/search?filter='+filter.toString())
+                                    .end((err, res) => {
+                                        response = res;
+                                        done();
+                                    });
+                            });
+                    });
+            });
+
+            it('status 200', () => {
+                response.status.should.be.eql(200);
+            });
+
+            it('body is object', () => {
+                response.body.should.be.a('array');
+            });
+
+        });
+    });
+    */
 });

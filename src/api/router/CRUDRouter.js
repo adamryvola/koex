@@ -1,5 +1,6 @@
 const EndpointRouter = require('./EndpointRouter');
 const { Errors } = require('../../constants');
+const qs = require('qs');
 const debug = require('../../log')('CRUDRouter');
 
 /**
@@ -17,6 +18,7 @@ class CRUDEndpoint extends EndpointRouter {
 
     initEndpoints() {
         super.initEndpoints();
+        this.initFilterEndpoint();
         this.initGetAllEndpoint();
         this.initGetByIdEndpoint();
         this.initCreateEndpoint();
@@ -100,6 +102,23 @@ class CRUDEndpoint extends EndpointRouter {
                 debug('[delete]', err.message);
                 return this.sendErr(res, 400, err.message);
             }));
+    }
+
+    /**
+     *  Init filter endpoint - GET '/search?filter=xxx'
+     */
+    initFilterEndpoint() {
+        this.router.get('/search', (req, res) => {
+            if (!req.query || !req.query.filter) return res.status(200).send([]);
+            const query = qs.parse(req.query);
+            debug('FILTER', query.filter[0]);
+            return this.getDAO().getByCriteria(req.query.filter, { user: req.user }).then(result => {
+                return res.status(200).send(result);
+            }).catch(err => {
+                debug('[filter]', err.message);
+                return this.sendErr(res, 400, err.message);
+            });
+        });
     }
 
     setDAO(dao) {

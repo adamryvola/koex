@@ -18,7 +18,7 @@ class UserDAO extends BasicDAO {
 
     isEmailAvailable(email, context) {
         return this.getModel().makeQuery(trx =>
-            this.createQuery(trx, context).skipUndefined().where('email', 'like', email).then(user => !user))
+            this.createQuery(trx, context).where('email', email).then(user => !user || !user[0]))
             .catch(err => {
                 debug('IsEmailAvailable', err.message);
                 throw new Error(Errors.GetByFieldFailed('UserDAO'));
