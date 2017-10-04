@@ -110,14 +110,12 @@ class CRUDEndpoint extends EndpointRouter {
     initFilterEndpoint() {
         this.router.get('/search', (req, res) => {
             if (!req.query || !req.query.filter) return res.status(200).send([]);
-            const query = qs.parse(req.query);
-            debug('FILTER', query.filter[0]);
-            return this.getDAO().getByCriteria(req.query.filter, { user: req.user }).then(result => {
-                return res.status(200).send(result);
-            }).catch(err => {
-                debug('[filter]', err.message);
-                return this.sendErr(res, 400, err.message);
-            });
+            // TODO parse filter
+            return this.getDAO().getByCriteria(req.query.filter, { user: req.user })
+                .then(result => res.status(200).send(result)).catch(err => {
+                    debug('[search]', err.message);
+                    return this.sendErr(res, 400, err.message);
+                });
         });
     }
 

@@ -11,7 +11,7 @@ Everything in API part is based on Express.js (Router). Everything in DB part is
 The best on all of this is, that you can use any part of this library and than change, override or inject you own implementation.
 For example: you want just CRUD router - so use CRUDRouter as express-middleware and inject your own DAO instance - no problem :) 
 
-All is fully tested: [Test reports](https://adamryvola.github.io/adane-fw/test) | [Code coverage](https://adamryvola.github.io/adane-fw/coverage)
+All is fully tested: [Test reports](https://adamryvola.github.io/koex/test) | [Code coverage](https://adamryvola.github.io/koex/coverage)
 
 There is UML for better understading relaionships: [UML export](https://drive.google.com/file/d/0BzAI-U4-wrvCdGZRUnNKRHJZVUE/view?usp=sharing)
 
@@ -66,14 +66,14 @@ module.exports = {
 ## Init - initialize knex database connection
 ```javascript
 //insert path to knex cofiguration file
-require('adane-fw').API.DBFactory.init(__dirname+'/knexfile.js')
+require('koex').API.DBFactory.init(__dirname+'/knexfile.js')
 ```
      
 ### Custom model, dao and router implementation
 ```javascript
 //Class
 // This custom model has created_at, created_by, updated_at, updated_by, uuid attributes
-const PublicModel = require('adane-fw').API.DBFactory.Models.PublicModel;
+const PublicModel = require('koex').API.DBFactory.Models.PublicModel;
 
 class CustomModel extends PublicModel {
     
@@ -93,7 +93,7 @@ module.exports = CustomModel;
 
 //DAO
 // This DAO has standard CRUD operations implemented
-const BasicDAO = require('adane-fw').API.DBFactory.DAO.BasciDAO;
+const BasicDAO = require('koex').API.DBFactory.DAO.BasciDAO;
 
 class CustomDAO extends BasicDAO {
     
@@ -102,7 +102,7 @@ module.exports = new CustomDAO(CustomModel);
 
 //Router
 // This Router has standard CRUD endpoints implemented
-const CRUDRouter = require('adane-fw').API.Routers.CRUDRouter;
+const CRUDRouter = require('koex').API.Routers.CRUDRouter;
 
 class CustomRouter extends CRUDRouter {
     initAdditionalEndpoints() {
@@ -120,7 +120,7 @@ app.use('/custom-entity', CustomRouter);
 
 
 //Migration - knex migration
-const initPublicModelTable = require('adane-fw').API.DBFactory.Migrations.initPublicModelTable;
+const initPublicModelTable = require('koex').API.DBFactory.Migrations.initPublicModelTable;
 
 const up = (kn, Promise) => {
     return kn.transaction(knex => {
@@ -135,7 +135,7 @@ const up = (kn, Promise) => {
 ### Use pre-defined models (e.g. User, Permission, Account, ...)
 ```javascript
 //UserModel, DAO and Router are done - we need just use migrations and router
-const UserRouter = require('adane-fw').API.Routers.UserRouter.getRouter();
+const UserRouter = require('koex').API.Routers.UserRouter.getRouter();
 
 const app = new Express();
 app.use('/user', UserRouter);
@@ -144,10 +144,10 @@ app.use('/user', UserRouter);
 // There is standard knex migrations for User, Account, Role and Permission entities
 
 //file: 001_user.js
-module.exports = require('adane-fw').API.DBFactory.Migrations.user;
+module.exports = require('koex').API.DBFactory.Migrations.user;
 
 //file: 002_account.js
-module.exports = require('adane-fw').API.DBFactory.Migrations.account;
+module.exports = require('koex').API.DBFactory.Migrations.account;
 //...
 ```
 
