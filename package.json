@@ -1,5 +1,5 @@
 {
-  "name": "adane-fw",
+  "name": "koex",
   "version": "0.0.1",
   "description": "Base entity management framework.",
   "main": "src/index.js",
