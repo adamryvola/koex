@@ -6,10 +6,11 @@
   "scripts": {
     "docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "test": "better-npm-run test",
-    "prepublish": "npm run docs && npm run test && mv coverage docs/coverage",
+    "prepublish": "npm run snyk-protect; npm run docs && npm run test && mv coverage docs/coverage",
     "dev": "better-npm-run dev",
     "eslint": "./node_modules/.bin/eslint src",
-    "refresh": "better-npm-run refresh"
+    "refresh": "better-npm-run refresh",
+    "snyk-protect": "snyk protect"
   },
   "betterScripts": {
     "test": {
@@ -51,7 +52,8 @@
     "lodash": "^4.17.4",
     "objection": "^0.8.8",
     "pg": "^7.3.0",
-    "qs": "^6.5.1"
+    "qs": "^6.5.1",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "body-parser": "^1.17.2",
@@ -70,5 +72,6 @@
     "mocha": "^3.5.0",
     "mochawesome": "^2.3.0",
     "nyc": "^11.2.1"
-  }
+  },
+  "snyk": true
 }
