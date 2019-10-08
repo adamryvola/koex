@@ -47,7 +47,7 @@
   "dependencies": {
     "debug": "^3.0.1",
     "express": "^4.15.4",
-    "knex": "^0.13.0",
+    "knex": "^0.19.5",
     "lodash": "^4.17.4",
     "objection": "^0.8.8",
     "pg": "^7.3.0",
